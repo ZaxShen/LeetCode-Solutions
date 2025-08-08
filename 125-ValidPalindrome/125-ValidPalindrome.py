@@ -1,15 +1,6 @@
-# Last updated: 8/7/2025, 11:10:50 PM
+# Last updated: 8/7/2025, 11:14:00 PM
 class Solution:
+    # O(n), O(n)
     def isPalindrome(self, s: str) -> bool:
-        i, j = 0, len(s)-1
-        while i <= j:
-            if not s[i].isalnum():
-                i += 1
-            elif not s[j].isalnum():
-                j -= 1
-            else:
-                if s[i].lower() != s[j].lower():
-                    return False
-                i += 1
-                j -= 1
-        return True
+        s = ''.join(i.lower() for i in s if i.isalnum())
+        return s == s[::-1]
