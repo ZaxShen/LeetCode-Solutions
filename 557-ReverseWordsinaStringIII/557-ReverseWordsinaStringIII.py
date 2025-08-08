@@ -1,17 +1,14 @@
-# Last updated: 8/8/2025, 11:01:26 AM
+# Last updated: 8/8/2025, 11:13:11 AM
 class Solution:
     def reverseWords(self, s: str) -> str:
-        def helper(l: List) -> List:
-            i, j = 0, len(l) - 1
+        def helper(word: str) -> str:
+            word = list(word)
+            i, j = 0, len(word) - 1
             while i < j:
-                l[i], l[j] = l[j], l[i]
+                word[i], word[j] = word[j], word[i]
                 i += 1
                 j -= 1
             
-            return ''.join(l)
+            return ''.join(word)
         
-        res = s.split(' ')
-        for i, l in enumerate(res):
-            res[i] = helper(list(l))
-        
-        return ' '.join(res)
+        return ' '.join(helper(word) for word in s.split())
