@@ -1,23 +1,19 @@
-# Last updated: 8/9/2025, 10:44:14 PM
+# Last updated: 8/9/2025, 10:49:34 PM
 class Solution:
+    # O(n), O(1)
     def sortedSquares(self, nums: List[int]) -> List[int]:
         i, j = 0, len(nums) - 1
-
-        if nums[i] >= 0:
-            return [num ** 2 for num in nums]
-        elif nums[j] <= 0:
-            return [num ** 2 for num in nums][::-1]
-
-        pos = len(nums) - 1
+        p = len(nums) - 1
         res = [0] * len(nums)
+
         while i <= j:
-            i_sqr, j_sqr = nums[i] ** 2, nums[j] ** 2
-            if i_sqr < j_sqr:
-                res[pos] = j_sqr
+            i_sq, j_sq = nums[i] ** 2, nums[j] ** 2
+            if i_sq < j_sq:
+                res[p] = j_sq
                 j -= 1
             else:
-                res[pos] = i_sqr
+                res[p] = i_sq
                 i += 1
-            pos -= 1
-        
+            p -= 1
+
         return res
