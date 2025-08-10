@@ -1,13 +1,13 @@
-# Last updated: 8/8/2025, 11:13:11 AM
+# Last updated: 8/10/2025, 2:49:55 PM
 class Solution:
     def reverseWords(self, s: str) -> str:
         def helper(word: str) -> str:
             word = list(word)
-            i, j = 0, len(word) - 1
-            while i < j:
-                word[i], word[j] = word[j], word[i]
-                i += 1
-                j -= 1
+            left, right = 0, len(word) - 1
+            while left < right:
+                word[left], word[right] = word[right], word[left]
+                left += 1
+                right -= 1
             
             return ''.join(word)
         
