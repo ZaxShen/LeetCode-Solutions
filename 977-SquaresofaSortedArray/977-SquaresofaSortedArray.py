@@ -1,14 +1,12 @@
-# Last updated: 8/9/2025, 10:43:37 PM
+# Last updated: 8/9/2025, 10:44:14 PM
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
         i, j = 0, len(nums) - 1
 
-        # For Full non-positive number
         if nums[i] >= 0:
             return [num ** 2 for num in nums]
         elif nums[j] <= 0:
             return [num ** 2 for num in nums][::-1]
-
 
         pos = len(nums) - 1
         res = [0] * len(nums)
