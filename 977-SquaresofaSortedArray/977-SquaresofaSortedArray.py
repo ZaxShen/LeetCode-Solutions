@@ -1,20 +1,18 @@
-# Last updated: 8/8/2025, 1:56:48 AM
-import collections
-
+# Last updated: 8/9/2025, 10:40:56 PM
 class Solution:
-    # O(n), O(n)
-    def sortedSquares(self, nums: list[int]) -> list[int]:
-        left, right = 0, len(nums) - 1
-        q = collections.deque()
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        i, j = 0, len(nums) - 1
+        pos = len(nums) - 1
+        res = [0] * len(nums)
 
-        while left <= right:
-            _left, _right = nums[left]**2, nums[right]**2
-            print(_left, _right)
-            if _left <= _right:
-                q.appendleft(_right)
-                right -= 1
+        while i <= j:
+            i_sqr, j_sqr = nums[i] ** 2, nums[j] ** 2
+            if i_sqr < j_sqr:
+                res[pos] = j_sqr
+                j -= 1
             else:
-                q.appendleft(_left)
-                left += 1
+                res[pos] = i_sqr
+                i += 1
+            pos -= 1
         
-        return list(q)
+        return res
