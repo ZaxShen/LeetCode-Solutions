@@ -1,13 +1,16 @@
-# Last updated: 8/9/2025, 10:00:55 PM
+# Last updated: 8/9/2025, 10:07:40 PM
 class Solution:
-    # O(n), O(1)
     def maxPower(self, s: str) -> int:
-        count = power = 1
-        for i in range(len(s) - 1):
-            if s[i] == s[i + 1]:
+        i = 0
+        count = power = 0
+        while i < len(s):
+            j = i
+            while j < len(s) and s[i] == s[j]:
                 count += 1
-                power = max(power, count)
+                j += 1
             else:
-                count = 1 
-        
+                power = max(power, count)
+                count = 0
+            i += 1
+
         return power
