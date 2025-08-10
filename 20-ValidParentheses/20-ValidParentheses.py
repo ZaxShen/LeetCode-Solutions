@@ -1,4 +1,4 @@
-# Last updated: 8/8/2025, 11:43:57 AM
+# Last updated: 8/9/2025, 11:22:38 PM
 class Solution:
     def isValid(self, s: str) -> bool:
         mapping = {'(': ')', '{': '}', '[': ']'}
@@ -10,5 +10,4 @@ class Solution:
             else:
                 stack.append(char)
         
-        return stack == []
-            
+        return len(stack) == 0
