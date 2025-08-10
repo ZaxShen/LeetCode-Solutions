@@ -1,4 +1,4 @@
-# Last updated: 8/9/2025, 10:30:35 PM
+# Last updated: 8/9/2025, 10:32:34 PM
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         d = {}
@@ -8,4 +8,4 @@ class Solution:
                 return d[diff], i
             d[v] = i
         
-        return [-1, -1]
+        return (-1, -1)
