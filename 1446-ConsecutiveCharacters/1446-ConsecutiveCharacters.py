@@ -1,4 +1,4 @@
-# Last updated: 8/10/2025, 8:05:32 PM
+# Last updated: 8/10/2025, 8:05:52 PM
 class Solution:
     def maxPower(self, s: str) -> int:
         left = max_power = 0
