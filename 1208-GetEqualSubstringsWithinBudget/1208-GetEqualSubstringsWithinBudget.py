@@ -1,4 +1,4 @@
-# Last updated: 8/11/2025, 7:26:06 PM
+# Last updated: 8/11/2025, 7:27:08 PM
 class Solution:
     # O(n), O(1)
     def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
