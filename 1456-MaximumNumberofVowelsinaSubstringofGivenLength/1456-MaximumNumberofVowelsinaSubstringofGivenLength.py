@@ -1,17 +1,19 @@
-# Last updated: 8/11/2025, 6:40:55 PM
+# Last updated: 8/11/2025, 6:56:54 PM
 class Solution:
+    # O(n), O(1)
     def maxVowels(self, s: str, k: int) -> int:
-        vowels = ('a', 'e', 'i', 'o', 'u')
-        max_vowels = count = left = 0
+        vowels = set('aeiou')
         
-        for right, char in enumerate(s):
-            if char in vowels:
-                count += 1
-                max_vowels = max(max_vowels, count)
-            if right - left + 1 == k:
-                if s[left] in vowels:
-                    count -= 1
-                left += 1
-        
-        return max_vowels
+        # Count vowels for in 1st window
+        count = sum(char in vowels for char in s[:k])
+        max_count = count
+
+        # Sliding Window
+        left = 0
+        for right in range(k, len(s)):
+            left = right - k
+            count += (s[right] in vowels) - (s[left] in vowels)
+            max_count = max(max_count, count)
+
+        return max_count
 
