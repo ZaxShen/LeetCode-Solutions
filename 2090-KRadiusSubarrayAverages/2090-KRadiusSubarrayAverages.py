@@ -1,19 +1,22 @@
-# Last updated: 8/11/2025, 12:36:04 PM
-from itertools import accumulate
-
+# Last updated: 8/11/2025, 12:56:18 PM
 class Solution:
+    # O(n), O(n)
     def getAverages(self, nums: List[int], k: int) -> List[int]:
-        prefix_sum = list(accumulate(nums))
-        res = []
-        n = 2 * k + 1
+        if k == 0:
+            return nums
 
-        for i in range(len(nums)):
-            left = i - k
-            right = i + k
-            if 0 <= left and right < len(nums):
-                _ = prefix_sum[right] - prefix_sum[left] + nums[left]
-                res.append(_ // n)
-            else:
-                res.append(-1)
+        n = len(nums)
+        avgs = [-1] * n
+        window_size = 2 * k + 1
 
-        return res
+        if window_size > n:
+            return avgs
+
+        window_sum = sum(nums[:window_size])
+        avgs[k] = window_sum // window_size
+        for i in range(window_size, n):
+            window_sum += nums[i] - nums[i - window_size]
+            avgs[i - k] = window_sum // window_size
+
+        return avgs
+
