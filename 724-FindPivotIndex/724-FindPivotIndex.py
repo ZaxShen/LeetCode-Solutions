@@ -1,16 +1,12 @@
-# Last updated: 8/11/2025, 8:24:12 PM
-from itertools import accumulate
-
+# Last updated: 8/11/2025, 8:26:35 PM
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
-        prefix_sum = list(accumulate(nums))
-        total = prefix_sum[-1]
+        total = sum(nums)
+        left_sum = 0
 
-        if total == prefix_sum[0]:
-            return 0
-
-        for i, num in enumerate(prefix_sum):
-            if i > 0 and total - num == prefix_sum[i - 1]:
+        for i, num in enumerate(nums):
+            if left_sum == total - left_sum - num:
                 return i
+            left_sum += num
 
         return -1
