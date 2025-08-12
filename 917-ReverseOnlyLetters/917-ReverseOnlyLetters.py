@@ -1,18 +1,16 @@
-# Last updated: 8/10/2025, 2:52:57 PM
+# Last updated: 8/12/2025, 7:10:56 PM
 class Solution:
-    # O(n), O(n)
     def reverseOnlyLetters(self, s: str) -> str:
-        s = list(s)
-        i, j = 0, len(s) - 1
-        while i <= j:
-            if s[i].isalpha() and s[j].isalpha():
-                s[i], s[j] = s[j], s[i]
-                i += 1
-                j -= 1
+        l = list(s)
+        left, right = 0, len(s) - 1
+        while left <= right:
+            if not l[left].isalpha():
+                left += 1
+            elif not l[right].isalpha():
+                right -= 1
             else:
-                if not s[i].isalpha():
-                    i += 1
-                if not s[j].isalpha():
-                    j -= 1
-        
-        return ''.join(s)
+                l[left], l[right] = l[right], l[left]
+                left += 1
+                right -= 1
+
+        return ''.join(l)
