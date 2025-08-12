@@ -1,25 +1,25 @@
-# Last updated: 8/11/2025, 9:22:31 PM
+# Last updated: 8/11/2025, 9:22:46 PM
 from collections import Counter
 
 class Solution:
     def maxSubarrayLength(self, nums: List[int], k: int) -> int:
         freq = Counter()
-        left = 0
+        left = 0  # Start at 0, not -1
         max_len = 0
         
         for right, num in enumerate(nums):
-            # Expand window: add current element
+            # Expand window by including current element
             freq[num] += 1
             
-            # Contract window: remove elements from left until valid
+            # Contract window while current element frequency exceeds k
             while freq[num] > k:
+                # Remove leftmost element from window
                 freq[nums[left]] -= 1
-                # Clean up zero counts to save memory
                 # if freq[nums[left]] == 0:
-                #     del freq[nums[left]]
+                #     del freq[nums[left]]  # Clean up empty entries
                 left += 1
             
-            # Update maximum length (standard formula)
+            # Update maximum window length seen so far
             max_len = max(max_len, right - left + 1)
         
         return max_len
