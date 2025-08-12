@@ -1,12 +1,14 @@
-# Last updated: 8/12/2025, 6:36:37 PM
+# Last updated: 8/12/2025, 6:38:24 PM
 class Solution:
+    # O(n), O(1)
     def waysToSplitArray(self, nums: List[int]) -> int:
         total = sum(nums)
-        left = curr = res = 0
+        left_sec = res = 0
 
         for right, num in enumerate(nums[:-1]):
-            curr += num
-            if curr >= total - curr:
+            left_sec += num
+            right_sec = total - left_sec
+            if left_sec >= right_sec:
                 res += 1
 
         return res
