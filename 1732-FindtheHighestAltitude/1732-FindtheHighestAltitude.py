@@ -1,6 +1,4 @@
-# Last updated: 8/11/2025, 8:01:42 PM
-from itertools import accumulate
-
+# Last updated: 8/11/2025, 8:02:24 PM
 class Solution:
     # O(n), O(1)
     def largestAltitude(self, gain: List[int]) -> int:
