@@ -1,4 +1,4 @@
-# Last updated: 8/11/2025, 9:22:06 PM
+# Last updated: 8/11/2025, 9:22:31 PM
 from collections import Counter
 
 class Solution:
@@ -15,8 +15,8 @@ class Solution:
             while freq[num] > k:
                 freq[nums[left]] -= 1
                 # Clean up zero counts to save memory
-                if freq[nums[left]] == 0:
-                    del freq[nums[left]]
+                # if freq[nums[left]] == 0:
+                #     del freq[nums[left]]
                 left += 1
             
             # Update maximum length (standard formula)
