@@ -1,17 +1,19 @@
-# Last updated: 8/12/2025, 8:24:08 PM
+# Last updated: 8/13/2025, 12:17:06 AM
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        if not strs:
-            return ""
+        # if len(strs) == 1:
+        #     return strs[0]
         
-        # Find minimum length to avoid index errors
         min_len = min(len(s) for s in strs)
-        
+
         for i in range(min_len):
+            # Use 
             char = strs[0][i]
-            # Check if all strings have the same character at position i
+
             for s in strs[1:]:
-                if s[i] != char:
-                    return strs[0][:i]
-        
+                if char != s[i]:
+                    return s[:i]
+
         return strs[0][:min_len]
+
+
