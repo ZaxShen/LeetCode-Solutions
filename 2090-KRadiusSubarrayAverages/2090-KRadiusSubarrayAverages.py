@@ -1,4 +1,4 @@
-# Last updated: 8/13/2025, 2:40:12 PM
+# Last updated: 8/13/2025, 7:38:44 PM
 class Solution:
     def getAverages(self, nums: List[int], k: int) -> List[int]:
         if k == 0:
@@ -11,11 +11,9 @@ class Solution:
         if window_size > n:
             return res
 
-        # First window
         window_sum = sum(nums[:window_size])
         res[k] = window_sum // window_size
 
-        # Sliding window
         for i in range(window_size, n):
             window_sum += nums[i] - nums[i - window_size]
             res[i - k] = window_sum // window_size
