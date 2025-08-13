@@ -1,9 +1,16 @@
-# Last updated: 8/13/2025, 9:48:06 AM
+# Last updated: 8/13/2025, 10:01:55 AM
 class Solution:
     def reversePrefix(self, word: str, ch: str) -> str:
-        try:
-            index = word.index(ch)
-        except ValueError:
-            return word
+        left = 0
 
-        return word[:index + 1][::-1] + word[index + 1:]
+        for right in range(len(word)):
+            if word[right] == ch:
+                word = list(word)
+                while left < right:
+                    word[left], word[right] = word[right], word[left]
+                    left += 1
+                    right -= 1
+                word = ''.join(word)
+                break
+
+        return word
