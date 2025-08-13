@@ -1,4 +1,4 @@
-# Last updated: 8/13/2025, 10:25:01 AM
+# Last updated: 8/13/2025, 10:27:17 AM
 from collections import Counter
 
 class Solution:
@@ -6,8 +6,8 @@ class Solution:
     def firstUniqChar(self, s: str) -> int:
         counter = Counter(s)
         
-        for k, v in counter.items():
-            if v == 1:
-                return s.index(k)
-        
+        for i, char in enumerate(s):
+            if counter[char] == 1:
+                return i
+
         return -1
