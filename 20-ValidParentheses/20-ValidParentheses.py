@@ -1,4 +1,4 @@
-# Last updated: 8/10/2025, 3:17:30 PM
+# Last updated: 8/12/2025, 8:00:38 PM
 class Solution:
     def isValid(self, s: str) -> bool:
         mapping = {'(': ')', '{': '}', '[': ']'}
