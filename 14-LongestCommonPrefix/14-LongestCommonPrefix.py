@@ -1,13 +1,10 @@
-# Last updated: 8/13/2025, 12:17:06 AM
+# Last updated: 8/13/2025, 1:13:13 AM
 class Solution:
+    # O()
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        # if len(strs) == 1:
-        #     return strs[0]
-        
         min_len = min(len(s) for s in strs)
 
         for i in range(min_len):
-            # Use 
             char = strs[0][i]
 
             for s in strs[1:]:
@@ -15,5 +12,3 @@ class Solution:
                     return s[:i]
 
         return strs[0][:min_len]
-
-
