@@ -1,7 +1,9 @@
-# Last updated: 8/10/2025, 7:25:50 PM
+# Last updated: 8/13/2025, 12:30:54 AM
 class Solution:
+    # O(n), O(1)
     def isPalindrome(self, s: str) -> bool:
         left, right = 0, len(s) - 1
+        
         while left < right:
             if not s[left].isalnum():
                 left += 1
