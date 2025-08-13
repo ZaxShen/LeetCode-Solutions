@@ -1,4 +1,4 @@
-# Last updated: 8/13/2025, 12:34:59 PM
+# Last updated: 8/13/2025, 2:16:51 PM
 class Solution:
     def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
         left = max_len = cost = 0
