@@ -1,11 +1,11 @@
-# Last updated: 8/11/2025, 12:23:35 PM
+# Last updated: 8/13/2025, 1:01:04 AM
 class Solution:
-    # O(n), O(1)
     def minStartValue(self, nums: List[int]) -> int:
-        curr = min_start_val = 0
+        curr = 0
+        res = float("inf")
 
         for num in nums:
             curr += num
-            min_start_val = min(min_start_val, curr)
+            res = min(res, curr)
 
-        return -min_start_val + 1
+        return max(-res + 1, 1)
