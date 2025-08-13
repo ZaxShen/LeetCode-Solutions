@@ -1,27 +1,22 @@
-# Last updated: 8/11/2025, 1:00:10 PM
+# Last updated: 8/13/2025, 12:59:36 PM
 class Solution:
     def getAverages(self, nums: List[int], k: int) -> List[int]:
-        if k == 0:
-            return nums
-        
         n = len(nums)
+        res = [-1] * n
         window_size = 2 * k + 1
-        avgs = [-1] * n
-        
-        # Not enough elements for any valid window
+
+        if n == 0:
+            return nums
         if window_size > n:
-            return avgs
-        
+            return res
+
+        # 1st window
         window_sum = sum(nums[:window_size])
-        
-        # Calculate averages for valid positions
-        for i in range(k, n - k):
-            if i == k:
-                # First valid position
-                avgs[i] = window_sum // window_size
-            else:
-                # Slide window: add new element, remove old element
-                window_sum += nums[i + k] - nums[i - k - 1]
-                avgs[i] = window_sum // window_size
-        
-        return avgs
+        res[k] = window_sum // window_size
+
+        # Sliding window
+        for i in range(window_size, n):
+            window_sum += nums[i] - nums[i - window_size]
+            res[i - k] = window_sum // window_size
+
+        return res
