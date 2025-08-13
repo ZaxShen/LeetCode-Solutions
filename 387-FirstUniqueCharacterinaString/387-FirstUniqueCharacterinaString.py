@@ -1,10 +1,13 @@
-# Last updated: 8/13/2025, 10:17:29 AM
+# Last updated: 8/13/2025, 10:25:01 AM
 from collections import Counter
 
 class Solution:
-
+    # O(n), O(n)
     def firstUniqChar(self, s: str) -> int:
         counter = Counter(s)
-        key = min(counter, key=counter.get)
-
-        return s.index(key) if counter[key] == 1 else -1
+        
+        for k, v in counter.items():
+            if v == 1:
+                return s.index(k)
+        
+        return -1
