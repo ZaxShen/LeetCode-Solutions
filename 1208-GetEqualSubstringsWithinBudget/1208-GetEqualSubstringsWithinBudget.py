@@ -1,12 +1,13 @@
-# Last updated: 8/12/2025, 6:19:54 PM
+# Last updated: 8/13/2025, 12:34:59 PM
 class Solution:
     def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
-        cost = left = meax_len = 0
+        left = max_len = cost = 0
 
         for right in range(len(s)):
             cost += abs(ord(s[right]) - ord(t[right]))
-            if cost > maxCost:
+            while cost > maxCost:
                 cost -= abs(ord(s[left]) - ord(t[left]))
                 left += 1
+            max_len = max(max_len, right - left + 1)
 
-        return right - left + 1
+        return max_len
