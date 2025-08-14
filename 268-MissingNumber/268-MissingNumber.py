@@ -1,7 +1,7 @@
-# Last updated: 8/14/2025, 1:34:27 AM
+# Last updated: 8/14/2025, 1:38:13 AM
 class Solution:
-    # O(n), O(n)
     def missingNumber(self, nums: List[int]) -> int:
-        uni_nums = set(range(len(nums) + 1))
-
-        return list(uni_nums - set(nums))[0]
+        n = len(nums)
+        expected_sum = n * (n + 1) // 2
+        actual_sum = sum(nums)
+        return expected_sum - actual_sum
