@@ -1,13 +1,15 @@
-# Last updated: 8/13/2025, 2:54:36 PM
+# Last updated: 8/14/2025, 3:39:48 PM
 class Solution:
     def waysToSplitArray(self, nums: List[int]) -> int:
         total = sum(nums)
-        left_sec = count = 0
+        left_sec = res = 0
 
-        for i, num in enumerate(nums[:-1]):
-            left_sec += num
+        for i, v in enumerate(nums[:-1]):
+            left_sec += v
             right_sec = total - left_sec
             if left_sec >= right_sec:
-                count += 1
+                res += 1
 
-        return count
+        return res
+
+            
