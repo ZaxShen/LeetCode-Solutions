@@ -1,11 +1,12 @@
-# Last updated: 8/14/2025, 1:15:44 AM
+# Last updated: 8/14/2025, 1:16:55 AM
 from collections import Counter
 
 class Solution:
+    # O(n), O(n)
     def repeatedCharacter(self, s: str) -> str:
         counter = Counter()
 
-        for i, char in enumerate(s):
+        for char in s:
             counter[char] += 1
             if counter[char] == 2:
                 return char
