@@ -1,11 +1,8 @@
-# Last updated: 8/14/2025, 1:21:47 AM
+# Last updated: 8/14/2025, 1:25:23 AM
+from collections import Counter
+
 class Solution:
-    # O(n), O(26)
     def checkIfPangram(self, sentence: str) -> bool:
-        uni_s = set()
+        counter = Counter(sentence)
 
-        for char in sentence:
-            uni_s.add(char)
-
-        return len(uni_s) == 26
-
+        return len(counter.keys()) == 26
