@@ -1,11 +1,12 @@
-# Last updated: 8/14/2025, 11:57:41 PM
+# Last updated: 8/15/2025, 5:28:40 PM
 class Solution:
+    # O(n), O(1)
     def isSubsequence(self, s: str, t: str) -> bool:
-        si = ti = 0
+        i = j = 0
 
-        while si < len(s) and ti < len(t):
-            if s[si] == t[ti]:
-                si += 1
-            ti += 1
+        while i < len(s) and j < len(t):
+            if s[i] == t[j]:
+                i += 1
+            j += 1
 
-        return len(s) == si
+        return i == len(s)
