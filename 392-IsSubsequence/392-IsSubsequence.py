@@ -1,4 +1,4 @@
-# Last updated: 8/14/2025, 3:36:50 PM
+# Last updated: 8/14/2025, 11:57:41 PM
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
         si = ti = 0
@@ -8,4 +8,4 @@ class Solution:
                 si += 1
             ti += 1
 
-        return si == len(s)
+        return len(s) == si
