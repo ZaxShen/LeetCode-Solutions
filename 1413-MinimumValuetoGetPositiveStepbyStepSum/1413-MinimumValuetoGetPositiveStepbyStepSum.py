@@ -1,4 +1,4 @@
-# Last updated: 8/13/2025, 1:49:08 AM
+# Last updated: 8/15/2025, 5:32:44 PM
 class Solution:
     def minStartValue(self, nums: List[int]) -> int:
         curr = res = 0
