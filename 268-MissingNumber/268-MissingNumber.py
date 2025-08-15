@@ -1,4 +1,4 @@
-# Last updated: 8/15/2025, 5:53:27 PM
+# Last updated: 8/15/2025, 5:55:40 PM
 class Solution:
     # O(n), O(1)
     def missingNumber(self, nums: List[int]) -> int:
@@ -7,7 +7,7 @@ class Solution:
         # So max num of nums should be
         max_num = n - 1
         # According to Gauss' Formula
-        expected_sum = max_num * n // 2
+        expected_sum = int(max_num * n / 2)
         actual_sum = sum(nums)
 
         return expected_sum - actual_sum
