@@ -1,4 +1,4 @@
-# Last updated: 8/15/2025, 4:58:06 PM
+# Last updated: 8/15/2025, 4:58:52 PM
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
         vowels = set('aeiou')
@@ -10,5 +10,7 @@ class Solution:
         for i in range(k, len(s)):
             count += (s[i] in vowels) - (s[i - k] in vowels)
             res = max(res, count)
+            if res == k:
+                return res
 
         return res
