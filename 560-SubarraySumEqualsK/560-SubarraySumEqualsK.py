@@ -1,19 +1,17 @@
-# Last updated: 8/14/2025, 11:10:53 AM
-from collections import defaultdict, Counter
+# Last updated: 8/15/2025, 4:43:26 PM
+from collections import defaultdict
 
 class Solution:
+    # O(n), O(n)
     def subarraySum(self, nums: List[int], k: int) -> int:
-        # prefix = defaultdict(int)
-        prefix = Counter()
-        # Initialize with 0:1 to handle the case when curr equals k
+        prefix = defaultdict(int)
+        # Init prefix
         prefix[0] = 1
         curr = count = 0
 
-        for num in nums:
-            curr += num
+        for i, v in enumerate(nums):
+            curr += v
             count += prefix[curr - k]
             prefix[curr] += 1
 
         return count
-
-        
