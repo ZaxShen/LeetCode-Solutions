@@ -1,15 +1,6 @@
-# Last updated: 8/15/2025, 3:53:10 PM
+# Last updated: 8/15/2025, 3:55:13 PM
+from math import log2
+
 class Solution:
     def isPowerOfFour(self, n: int) -> bool:
-        if n == 1:
-            return True
-
-        exp = 1
-        curr = 4
-        while curr <= n:
-            curr = 4 ** exp
-            exp += 1
-            if curr == n:
-                return True
-        
-        return False
+        return n > 0 and log2(n) % 2 == 0
