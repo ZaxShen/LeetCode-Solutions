@@ -1,17 +1,19 @@
-# Last updated: 8/15/2025, 4:43:26 PM
+# Last updated: 8/15/2025, 8:09:46 PM
 from collections import defaultdict
 
 class Solution:
-    # O(n), O(n)
+	# O(n), O(n)
     def subarraySum(self, nums: List[int], k: int) -> int:
-        prefix = defaultdict(int)
-        # Init prefix
-        prefix[0] = 1
-        curr = count = 0
+        seen = defaultdict(int)
+        # Initialize with 0:1 to handle the case when prefix_sum equals k
+        seen[0] = 1
+        prefix_sum = count = 0
 
-        for i, v in enumerate(nums):
-            curr += v
-            count += prefix[curr - k]
-            prefix[curr] += 1
+        for num in nums:
+            prefix_sum += num
+            # Find the number of subarrays ending here with sum k
+            count += seen[prefix_sum - k]
+            # Record the current sum into the map
+            seen[prefix_sum] += 1
 
         return count
