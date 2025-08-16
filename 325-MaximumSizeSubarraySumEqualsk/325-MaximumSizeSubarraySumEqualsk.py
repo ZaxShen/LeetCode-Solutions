@@ -1,4 +1,4 @@
-# Last updated: 8/16/2025, 12:14:31 PM
+# Last updated: 8/16/2025, 12:14:40 PM
 class Solution:
     # O(n), O(n)
     def maxSubArrayLen(self, nums: List[int], k: int) -> int:
