@@ -1,4 +1,4 @@
-# Last updated: 8/15/2025, 8:29:59 PM
+# Last updated: 8/15/2025, 8:30:09 PM
 from collections import defaultdict
 
 
@@ -12,9 +12,8 @@ class Solution:
             prefix_sum += num % 2  # Key transformation
 
             # Look for: prefix_sum - target
-            if prefix_sum - k in seen:
-                # Found! Update result
-                res += seen[prefix_sum - k]
+            # Found! Update result
+            res += seen[prefix_sum - k]
             # Update seen
             seen[prefix_sum] += 1
 
