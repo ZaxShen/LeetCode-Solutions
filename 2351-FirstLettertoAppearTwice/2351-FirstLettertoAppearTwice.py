@@ -1,10 +1,18 @@
-# Last updated: 8/14/2025, 1:17:53 AM
-class Solution:
-    # O(n), O(n)
-    def repeatedCharacter(self, s: str) -> str:
-        uni_s = set()
+# Last updated: 8/16/2025, 12:40:50 PM
+from collections import Counter
 
-        for char in s:
-            if char in uni_s:
-                return char
-            uni_s.add(char)
+class Solution:
+    def repeatedCharacter(self, s: str) -> str:
+        counter = Counter()
+
+        for i in range(len(s) - 1):
+            if s[i] == s[i + 1]:
+                return s[i]
+            else:
+                if counter[s[i]] == 1:
+                    return s[i]
+            counter[s[i]] += 1
+
+        return s[-1]
+
+        
