@@ -1,14 +1,12 @@
-# Last updated: 8/14/2025, 1:46:05 AM
-from collections import Counter
-
+# Last updated: 8/16/2025, 12:33:20 PM
 class Solution:
+    # O(nlogn), O(1)
     def countElements(self, arr: List[int]) -> int:
-        hash_set = set(arr)
-        count = 0
+        hashset = set(arr)
+        res = 0
 
-        for i in arr:
-            if i + 1 in hash_set:
-                count += 1
-        
-        return count
-        
+        for num in arr:
+            if num + 1 in hashset:
+                res += 1
+
+        return res
