@@ -1,8 +1,8 @@
-# Last updated: 8/16/2025, 12:43:13 PM
+# Last updated: 8/16/2025, 12:43:23 PM
 from collections import Counter
 
 class Solution:
-    # O
+    # O(n), O(m)
     def repeatedCharacter(self, s: str) -> str:
         hashset = set()
 
