@@ -1,8 +1,6 @@
-# Last updated: 8/15/2025, 6:09:05 PM
-    int sum = 0;
-    for (int i = 0; i < nums.length; ++i) {
-        sum += nums[i];
-    }
-    
-    return nums.length * (nums.length + 1) / 2 - sum;
-}
+# Last updated: 8/16/2025, 12:45:46 PM
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums) + 1
+        expected_nums = range(n)
+        return sum(expected_nums) - sum(nums)
