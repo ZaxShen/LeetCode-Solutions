@@ -1,4 +1,4 @@
-# Last updated: 8/15/2025, 8:09:46 PM
+# Last updated: 8/15/2025, 8:12:08 PM
 from collections import defaultdict
 
 class Solution:
@@ -7,13 +7,13 @@ class Solution:
         seen = defaultdict(int)
         # Initialize with 0:1 to handle the case when prefix_sum equals k
         seen[0] = 1
-        prefix_sum = count = 0
 
+        prefix_sum = res = 0
         for num in nums:
             prefix_sum += num
             # Find the number of subarrays ending here with sum k
-            count += seen[prefix_sum - k]
+            res += seen[prefix_sum - k]
             # Record the current sum into the map
             seen[prefix_sum] += 1
 
-        return count
+        return res
