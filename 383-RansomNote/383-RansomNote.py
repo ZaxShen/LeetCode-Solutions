@@ -1,17 +1,18 @@
-# Last updated: 8/17/2025, 7:48:31 PM
+# Last updated: 8/17/2025, 7:50:56 PM
 from collections import Counter
 
 class Solution:
+    # O(n), O(n+m)
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         # Early termination
         if len(ransomNote) > len(magazine):
             return False
 
-        r_counter = Counter(ransomNote)
         m_counter = Counter(magazine)
 
-        for char, count in r_counter.items():
-            if count > m_counter[char]:
+        for char in ransomNote:
+            m_counter[char] -= 1
+            if m_counter[char] < 0:
                 return False
 
         return True
