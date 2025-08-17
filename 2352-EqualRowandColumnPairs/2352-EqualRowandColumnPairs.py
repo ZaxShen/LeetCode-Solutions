@@ -1,18 +1,18 @@
-# Last updated: 8/17/2025, 3:39:05 PM
+# Last updated: 8/17/2025, 3:41:39 PM
 from collections import Counter
 
 class Solution:
-    # O(n^2), O(n^2)
-    def equalPairs(self, grid: List[List[int]]) -> int:
-        # Count row patterns
+    # O(n^3), O(n^2)
+    def equalPairs(self, grid: list[list[int]]) -> int:
+        res = 0
+
+        # list cannot be stored in dict as an valid index
         rows = Counter(tuple(row) for row in grid)
-        
-        # Count column patterns using zip transpose
-        cols = Counter(zip(*grid))
-        
-        # Count matching pairs
-        return sum(
-            rows[pattern] * cols[pattern] 
-            for pattern in rows 
-            if pattern in cols
-            )
+
+        n_rows = len(grid)
+        n_cols = len(grid[0])
+        for r in range(n_rows):
+            col = tuple(grid[c][r] for c in range(n_cols))
+            res += rows[col]
+
+        return res
