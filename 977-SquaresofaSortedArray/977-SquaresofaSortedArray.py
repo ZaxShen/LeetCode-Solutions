@@ -1,4 +1,4 @@
-# Last updated: 8/17/2025, 5:33:37 PM
+# Last updated: 8/17/2025, 5:46:10 PM
 class Solution:
     # O(n), O(1)
     def sortedSquares(self, nums: List[int]) -> List[int]:
@@ -13,12 +13,12 @@ class Solution:
         res = [0] * len(nums)
         pos = right
         while left <= right:
-            sq_left, sq_right = nums[left] ** 2, nums[right] ** 2
-            if sq_left < sq_right:
-                res[pos] = sq_right
+            abs_left, abs_right = abs(nums[left]), abs(nums[right])
+            if abs_left < abs_right:
+                res[pos] = abs_right ** 2
                 right -= 1
             else:
-                res[pos] = sq_left
+                res[pos] = abs_left ** 2
                 left += 1
             pos -= 1
         
