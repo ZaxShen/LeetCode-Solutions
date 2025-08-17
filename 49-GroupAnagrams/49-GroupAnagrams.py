@@ -1,13 +1,15 @@
-# Last updated: 8/17/2025, 4:27:32 PM
-from collections import defaultdict
+# Last updated: 8/17/2025, 4:34:00 PM
+from collections import defaultdict, Counter
 
 class Solution:
-    # O(n*m*mlogm), O(n*m)
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         hashmap = defaultdict(list)
-
+        
         for s in strs:
-            key = ''.join(sorted(s))
+            # Count character frequencies
+            count = Counter(s)
+            # Create hashable key from frequency
+            key = tuple(sorted(count.items()))
             hashmap[key].append(s)
-
+        
         return list(hashmap.values())
