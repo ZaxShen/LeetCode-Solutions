@@ -1,16 +1,16 @@
-# Last updated: 8/17/2025, 12:34:53 AM
+# Last updated: 8/17/2025, 12:52:56 PM
 from collections import Counter
 
 class Solution:
-    # O(nlogn), O(n)
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
         loss_count = Counter()
 
         for winner, loser in matches:
-            loss_count[winner] += 0  # Ensure winner exists with 0 losses
+            loss_count[winner] += 0
             loss_count[loser] += 1
 
-        zero_loss, one_loss = [], []
+        zero_loss = []
+        one_loss = []
         for player, loss in loss_count.items():
             if loss == 0:
                 zero_loss.append(player)
