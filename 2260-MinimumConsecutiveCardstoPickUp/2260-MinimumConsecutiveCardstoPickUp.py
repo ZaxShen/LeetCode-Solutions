@@ -1,4 +1,4 @@
-# Last updated: 8/17/2025, 6:07:35 PM
+# Last updated: 8/17/2025, 6:12:33 PM
 class Solution:
     # O(n), O(m)
     def minimumCardPickup(self, cards: List[int]) -> int:
@@ -8,6 +8,8 @@ class Solution:
         for i, card in enumerate(cards):
             if card in seen:
                 res = min(res, i - seen[card] + 1)
+                if res == 2:
+                    return 2
             seen[card] = i
 
         return res if res != float('inf') else -1
