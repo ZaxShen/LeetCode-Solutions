@@ -1,22 +1,20 @@
-# Last updated: 8/17/2025, 3:27:07 PM
+# Last updated: 8/17/2025, 3:31:37 PM
 from collections import Counter
 
 class Solution:
-    def equalPairs(self, grid: List[List[int]]) -> int:
-        rows = Counter()
-        cols = Counter()
-
-        for row in grid:
-            rows[tuple(row)] += 1
-        
-        for col in zip(*grid):
-            cols[col] += 1
-
-        print(rows)
-        print(cols)
+    # O(n^2), O(n^2)
+    def equalPairs(self, grid: list[list[int]]) -> int:
         res = 0
-        for row in rows:
-            if row in cols:
-                res += rows[row] * cols[row]
+
+        # list cannot be stored in dict as an valid index
+        rows = Counter(tuple(row) for row in grid)
+
+        n_rows = len(grid)
+        n_cols = len(grid[0])
+
+        for r in range(n_rows):
+            col = [grid[c][r] for c in range(n_cols)]
+            col = tuple(col)
+            res += rows[col]
 
         return res
