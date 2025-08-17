@@ -1,25 +1,16 @@
-# Last updated: 8/17/2025, 6:54:01 PM
+# Last updated: 8/17/2025, 7:07:30 PM
 from collections import defaultdict, Counter
 
 class Solution:
+    # O(n*m), O(k)
     def maximumSum(self, nums: List[int]) -> int:
-        seen = defaultdict(list)
-
-        def sum_digits(num: int) -> int:
-            res = 0
-            while num > 0:
-                res += num % 10
-                num //= 10
-
-            return res
+        seen = defaultdict(int)
+        max_sum = -1
         
         for num in nums:
-            sum_num = sum_digits(num)
-            seen[sum_num].append(num)
+            sum_digits = sum(map(int, str(num)))
+            if sum_digits in seen:
+                max_sum = max(max_sum, seen[sum_digits] + num)
+            seen[sum_digits] = max(num, seen[sum_digits])
 
-        res = -1
-        for k, v in seen.items():
-            if len(v) >= 2:
-                res = max(res, sum(sorted(v)[-2:]))
-
-        return res
+        return max_sum
