@@ -1,11 +1,12 @@
-# Last updated: 8/15/2025, 4:26:20 PM
+# Last updated: 8/16/2025, 10:53:25 PM
 from collections import Counter
 
 class Solution:
+    # O(n), O(n)
     def maxSubarrayLength(self, nums: List[int], k: int) -> int:
         counter = Counter()
-        left = res = 0
 
+        left = res = 0
         for right, num in enumerate(nums):
             counter[num] += 1
             
