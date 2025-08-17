@@ -1,4 +1,4 @@
-# Last updated: 8/17/2025, 3:31:37 PM
+# Last updated: 8/17/2025, 3:31:59 PM
 from collections import Counter
 
 class Solution:
@@ -13,8 +13,7 @@ class Solution:
         n_cols = len(grid[0])
 
         for r in range(n_rows):
-            col = [grid[c][r] for c in range(n_cols)]
-            col = tuple(col)
+            col = tuple(grid[c][r] for c in range(n_cols))
             res += rows[col]
 
         return res
