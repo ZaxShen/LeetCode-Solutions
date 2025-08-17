@@ -1,4 +1,4 @@
-# Last updated: 8/17/2025, 5:33:32 PM
+# Last updated: 8/17/2025, 5:33:37 PM
 class Solution:
     # O(n), O(1)
     def sortedSquares(self, nums: List[int]) -> List[int]:
