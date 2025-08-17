@@ -1,4 +1,4 @@
-# Last updated: 8/17/2025, 3:38:09 PM
+# Last updated: 8/17/2025, 3:39:05 PM
 from collections import Counter
 
 class Solution:
@@ -11,6 +11,8 @@ class Solution:
         cols = Counter(zip(*grid))
         
         # Count matching pairs
-        return sum(rows[pattern] * cols[pattern] 
-                  for pattern in rows 
-                  if pattern in cols)
+        return sum(
+            rows[pattern] * cols[pattern] 
+            for pattern in rows 
+            if pattern in cols
+            )
