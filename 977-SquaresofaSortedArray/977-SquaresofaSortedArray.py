@@ -1,4 +1,4 @@
-# Last updated: 8/17/2025, 5:29:44 PM
+# Last updated: 8/17/2025, 5:33:32 PM
 class Solution:
     # O(n), O(1)
     def sortedSquares(self, nums: List[int]) -> List[int]:
@@ -8,7 +8,7 @@ class Solution:
         if nums[left] >= 0:
             return [num ** 2 for num in nums]
         elif nums[right] <= 0:
-            return [num ** 2 for num in nums[::-1]]
+            return [num ** 2 for num in reversed(nums)]
 
         res = [0] * len(nums)
         pos = right
