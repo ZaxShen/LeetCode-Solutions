@@ -1,8 +1,12 @@
-# Last updated: 8/17/2025, 7:47:53 PM
+# Last updated: 8/17/2025, 7:48:31 PM
 from collections import Counter
 
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        # Early termination
+        if len(ransomNote) > len(magazine):
+            return False
+
         r_counter = Counter(ransomNote)
         m_counter = Counter(magazine)
 
