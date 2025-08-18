@@ -1,4 +1,4 @@
-# Last updated: 8/17/2025, 8:04:48 PM
+# Last updated: 8/17/2025, 8:04:56 PM
 class Solution:
     # O(n+m), O(m)
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
