@@ -7,7 +7,6 @@ class Solution:
 
         res = 0
         for pattern in grid:
-            pattern = tuple(pattern)
-            res += cols[pattern]
+            res += cols[tuple(pattern)]
 
         return res
