@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(k)
     def lengthOfLongestSubstring(self, s: str) -> int:
         counter = {}
         left = res = 0
