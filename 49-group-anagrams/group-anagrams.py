@@ -8,8 +8,4 @@ class Solution:
             key = tuple(sorted(s))
             hashmap[key].append(s)
 
-        res = []
-        for l in hashmap.values():
-            res.append(l)
-
-        return res
+        return list(hashmap.values())
