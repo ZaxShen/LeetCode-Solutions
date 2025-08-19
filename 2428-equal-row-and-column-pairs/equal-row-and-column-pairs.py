@@ -1,12 +1,14 @@
 from collections import Counter
 
 class Solution:
-    # O(n^2), O(n^2)
     def equalPairs(self, grid: List[List[int]]) -> int:
-        cols = Counter(tuple(col) for col in zip(*grid))
+        cols = (tuple(col) for col in zip(*grid))
+        cols = Counter(cols)
 
         res = 0
         for pattern in grid:
-            res += cols[tuple(pattern)]
+            pattern = tuple(pattern)
+            if pattern in cols:
+                res += cols[pattern]
 
         return res
