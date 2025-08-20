@@ -1,13 +1,12 @@
-from collections import Counter
+from collections import defaultdict
 
 class Solution:
-    # O(n), O(k)
-    def numIdenticalPairs(self, nums: List[int]) -> int:
-        # n * (n - 1) / 2
-        count = Counter(nums)
-
+    def numIdenticalPairs(self, nums: list[int]) -> int:
+        count = defaultdict(int)
         res = 0
-        for v in count.values():
-            res += v * (v - 1) / 2
 
-        return int(res)
+        for num in nums:
+            res += count[num]
+            count[num] += 1
+        
+        return res
