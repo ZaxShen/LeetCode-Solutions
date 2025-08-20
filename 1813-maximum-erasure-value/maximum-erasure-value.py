@@ -1,22 +1,21 @@
 from collections import Counter
 
+
 class Solution:
     # O(n), O(n)
     def maximumUniqueSubarray(self, nums: List[int]) -> int:
-        count = Counter()
+        hashset = set()
 
-        left = res = prefix = 0
-        for right, num in enumerate(nums):
+        left = prefix = res = 0
+        for num in nums:
             prefix += num
-            count[num] += 1
-            
-            while count[num] == 2:
+
+            while num in hashset:
                 prefix -= nums[left]
-                count[nums[left]] -= 1
+                hashset.remove(nums[left])
                 left += 1
-            
+
+            hashset.add(num)
             res = max(res, prefix)
 
         return res
-
-
