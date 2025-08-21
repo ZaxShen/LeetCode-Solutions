@@ -3,7 +3,7 @@ class Solution:
         max_power = power = 0
 
         left = 0
-        for left in range(len(s)):
+        for _ in range(len(s)):
             right = left
             while right < len(s) and s[left] == s[right]:
                 right += 1
