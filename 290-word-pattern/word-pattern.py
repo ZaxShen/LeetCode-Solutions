@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(n)
     def wordPattern(self, pattern: str, s: str) -> bool:
         s = s.split()
 
