@@ -1,15 +1,17 @@
 class Solution:
     def isPathCrossing(self, path: str) -> bool:
-        visited = {(0, 0)}
         x = y = 0
+        visited = {(x, y)}
 
-        for move in path:
-            x += (move == 'E') - (move == 'W')
-            y += (move == 'N') - (move == 'S')
+        for p in path:
+            match p:
+                case 'N': y += 1
+                case 'S': y -= 1
+                case 'E': x += 1
+                case 'W': x -= 1
 
-            pos = (x, y)
-            if pos in visited:
+            if (x, y) in visited:
                 return True
-            visited.add(pos)
+            visited.add((x, y))
 
         return False
