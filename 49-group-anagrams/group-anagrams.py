@@ -1,11 +1,10 @@
-from collections import defaultdict, Counter
+from collections import defaultdict
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         hashmap = defaultdict(list)
 
-        for s in strs:
-            key = tuple(sorted(Counter(s).items()))
-            hashmap[key].append(s)
+        for word in strs:
+            hashmap[tuple(sorted(word))].append(word)
 
         return list(hashmap.values())
