@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(1)
     def romanToInt(self, s: str) -> int:
         roman = {
             'I': 1,
@@ -12,13 +13,13 @@ class Solution:
 
         res = 0
         for i in range(len(s) - 1):
-            num, _ = roman[s[i]], roman[s[i + 1]]
-            if num >= _:
-                res += num
+            curr_num, next_num = roman[s[i]], roman[s[i + 1]]
+            if curr_num >= next_num:
+                res += curr_num
             else:
-                res -= num
+                res -= curr_num
 
-        # Add final num
+        # Add the final num
         res += roman[s[-1]]
 
         return res
