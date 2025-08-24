@@ -7,7 +7,8 @@ class Solution:
 
         res = 0
         for num in nums:
-            count[num] -= 1
-            res += count[num]
+            if num in count:
+                count[num] -= 1
+                res += count[num]
 
         return res
