@@ -9,6 +9,6 @@ class Solution:
         curr = head
 
         while curr:
-            prev, curr.next, curr = curr, prev, curr.next
+            curr.next, prev, curr = prev, curr, curr.next
 
         return prev
