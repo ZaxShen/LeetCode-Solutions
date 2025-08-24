@@ -10,20 +10,13 @@ class Solution:
         prev = dummy
 
         while prev.next and prev.next.next:
-            # Init the pair to swap
             first = prev.next
             second = first.next
 
-            # Perform the swap
-            # prev.next = second  # Connect previous part
-            # first.next = second.next  # Preserve connection to rest
-            # second.next = first  # Complete swap
-
-            first.next = second.next
             prev.next = second
+            first.next = second.next
             second.next = first
 
-            # Move prev to end of swapped pair
             prev = first
 
         return dummy.next
