@@ -5,10 +5,8 @@ class Solution:
     def frequencySort(self, s: str) -> str:
         count = Counter(s)
 
-        sorted_s = sorted(count, key=count.get, reverse=True)
+        res = []
+        for char, freq in count.most_common():
+            res.append(char * freq)
 
-        res = ''
-        for k in sorted_s:
-            res += k * count[k]
-
-        return res
+        return ''.join(res)
