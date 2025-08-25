@@ -4,10 +4,11 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    # O(n), O(1)
     def getDecimalValue(self, head: Optional[ListNode]) -> int:
-        result = 0
-        while head:
-            result = result * 2 + head.val
-            head = head.next
-        return result
+        curr = head
+        res = 0
+        while curr:
+            res = 2 * res + curr.val
+            curr = curr.next
+
+        return res
