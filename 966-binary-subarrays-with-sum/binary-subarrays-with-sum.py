@@ -1,17 +1,18 @@
+from collections import defaultdict
+
 class Solution:
-    # O(n), O(n)
     def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
-        seen = {0: 1}
-        prefix = res = 0
+        seen = defaultdict(int)
+        seen[0] = 1
+        
+        prefix = count = 0
 
         for num in nums:
             prefix += num
             lookup = prefix - goal
 
-            # if lookup in seen:
-                # res += seen[lookup]
-            res += seen.get(lookup, 0)
+            count += seen[lookup]
 
-            seen[prefix] = seen.get(prefix, 0) + 1
+            seen[prefix] += 1
 
-        return res
+        return count
