@@ -5,13 +5,12 @@
 #         self.next = None
 
 class Solution:
-    # O(N+M), O(1)
+    # O(m+n), O(1)
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        pA = headA
-        pB = headB
+        pA, pB = headA, headB
 
         while pA != pB:
-            pA = headB if pA is None else pA.next
-            pB = headA if pB is None else pB.next
+            pA = pA.next if pA else headB
+            pB = pB.next if pB else headA
 
         return pA
