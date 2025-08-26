@@ -5,17 +5,14 @@
 #         self.next = next
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        dummy = ListNode(0)
-        dummy.next = head
-        prev = dummy
+        dummy = ListNode(0, head)
 
+        prev = dummy
         while prev.next and prev.next.next:
             first = prev.next
             second = first.next
 
-            prev.next = second
-            first.next = second.next
-            second.next = first
+            second.next, prev.next, first.next = first, second, second.next
 
             prev = first
 
