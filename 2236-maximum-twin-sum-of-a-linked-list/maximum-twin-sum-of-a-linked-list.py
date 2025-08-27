@@ -9,7 +9,7 @@ class Solution:
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-            
+
         prev, curr = None, slow
         while curr:
             curr.next, prev, curr = prev, curr, curr.next
@@ -22,4 +22,3 @@ class Solution:
             second = second.next
 
         return res
-
