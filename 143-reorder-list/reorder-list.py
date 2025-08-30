@@ -29,4 +29,5 @@ class Solution:
             first.next, first = second, first.next
             second.next, second = first, second.next
 
-        return dummy.next
+        # return dummy.next
+        return head
