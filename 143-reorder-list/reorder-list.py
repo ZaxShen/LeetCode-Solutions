@@ -8,7 +8,7 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        dummy = ListNode(0, head)
+        # dummy = ListNode(0, head)
         # Get the second half of list
         slow = fast = head
         while fast and fast.next:
@@ -24,10 +24,6 @@ class Solution:
         # Record List
         first = head
         second = prev
-        # while first and second:
         while second.next:
             first.next, first = second, first.next
             second.next, second = first, second.next
-
-        # return dummy.next
-        return head
