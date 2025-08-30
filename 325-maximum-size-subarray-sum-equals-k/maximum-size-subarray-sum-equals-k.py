@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(n)
     def maxSubArrayLen(self, nums: List[int], k: int) -> int:
         seen = {0: -1}
         prefix = res = 0
@@ -10,9 +11,7 @@ class Solution:
             if lookup in seen:
                 res = max(res, i - seen[lookup])
 
-            if prefix in seen:
-                seen[prefix] = min(seen[prefix], i)
-            else:
+            if prefix not in seen:
                 seen[prefix] = i
 
         return res
