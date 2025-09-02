@@ -1,5 +1,4 @@
 class Solution:
     def reversePrefix(self, word: str, ch: str) -> str:
-        i = word.find(ch)
-        res = word[:i + 1][::-1] + word[i + 1:]
-        return ''.join(res)
+        index = word.find(ch) + 1
+        return word[:index][::-1] + word[index:]
