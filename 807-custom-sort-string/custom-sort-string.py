@@ -1,15 +1,3 @@
-from collections import Counter
-
 class Solution:
     def customSortString(self, order: str, s: str) -> str:
-        count = Counter(s)
-        res = []
-
-        for char in order:
-            res.append(char * count[char])
-            del count[char]
-
-        for char, freq in count.items():
-            res.append(char * freq)
-
-        return ''.join(res)
+        return ''.join(sorted(s, key = lambda x: order.find(x) if x in s else len(order)))
