@@ -8,22 +8,23 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        # dummy = ListNode(0, head)
-        # Get the second half of list
+        dummy = ListNode(0, head)
+
         slow = fast = head
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
 
-        # Reverse seond half of list
         prev = None
         curr = slow
         while curr:
             curr.next, prev, curr = prev, curr, curr.next
 
-        # Record List
         first = head
         second = prev
-        while second.next:
+        while second and second.next:
             first.next, first = second, first.next
             second.next, second = first, second.next
+
+
+        return dummy.next
