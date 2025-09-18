@@ -1,11 +1,13 @@
+from collections import defaultdict
+
 class Solution:
-    # O(n), O(k)
     def maxSubarrayLength(self, nums: List[int], k: int) -> int:
-        count = {}
+        count = defaultdict(int)
         left = res = 0
+
         for right, num in enumerate(nums):
-            count[num] = count.get(num, 0) + 1
-            
+            count[num] += 1
+
             while count[num] > k:
                 count[nums[left]] -= 1
                 left += 1
