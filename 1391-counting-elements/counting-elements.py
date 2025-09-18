@@ -1,12 +1,10 @@
 class Solution:
-    # O(n), O(k)
     def countElements(self, arr: List[int]) -> int:
         hashset = set(arr)
+        res = 0
 
-        count = 0
         for num in arr:
-            if num + 1 in arr:
-                count += 1
+            if num + 1 in hashset:
+                res += 1
 
-        return count
-
+        return res
