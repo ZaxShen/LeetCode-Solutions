@@ -1,8 +1,8 @@
-from collections import defaultdict
-
 class Solution:
+    # O(n)
     def destCity(self, paths: List[List[str]]) -> str:
-        A, B = zip(*paths)
-        res = set(B) - set(A)
-        
-        return list(res)[0]
+        starts = {start for start, _ in paths}
+
+        for _, destination in paths:
+            if destination not in starts:
+                return destination
