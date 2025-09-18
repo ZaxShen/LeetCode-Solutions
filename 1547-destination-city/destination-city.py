@@ -1,9 +1,8 @@
+from collections import defaultdict
+
 class Solution:
-    # O(n), O(n)
     def destCity(self, paths: List[List[str]]) -> str:
-        starts = {start for start, _ in paths}
+        A, B = zip(*paths)
+        res = set(B) - set(A)
         
-        # Early termination
-        for _, end in paths:
-            if end not in starts:
-                return end
+        return list(res)[0]
