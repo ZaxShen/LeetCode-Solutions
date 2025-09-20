@@ -4,21 +4,21 @@ class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         if len(s1) > len(s2):
             return False
-
-        win_size = len(s1)
-
-        # First window
-        perm1 = Counter(s1)
-        perm2 = Counter(s2[:win_size])
-
-        if perm1 == perm2:
+        
+        c1 = Counter(s1)
+        c2 = Counter(s2[:len(s1)])  # First window
+        if c1 == c2:
             return True
 
-        # Slide window
-        for i in range(win_size, len(s2)):
-            perm2[s2[i]] += 1
-            perm2[s2[i - win_size]] -= 1
-            if perm1 == perm2:
+        left = 0
+        for right in range(len(s1), len(s2)):
+            c2[s2[right]] += 1
+            c2[s2[left]] -= 1
+            left += 1
+
+            if c1 == c2:
                 return True
 
         return False
+
+
