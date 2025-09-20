@@ -1,17 +1,18 @@
+from collections import defaultdict
+
 class Solution:
     def maxSubArrayLen(self, nums: List[int], k: int) -> int:
         seen = {0: -1}
-        prefix = max_len = 0
+        prefix = res = 0
 
         for i, num in enumerate(nums):
             prefix += num
-            lookup = prefix - k
+            target = prefix - k
 
-            if lookup in seen:
-                max_len = max(max_len, i - seen[lookup])
+            if target in seen:
+                res = max(res, i - seen[target])
 
-            # Storing the 1st appearance for max length
             if prefix not in seen:
                 seen[prefix] = i
 
-        return max_len
+        return res
