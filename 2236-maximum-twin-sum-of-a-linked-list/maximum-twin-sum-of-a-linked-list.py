@@ -5,7 +5,7 @@
 #         self.next = next
 class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
-        slow = fast = head
+        slow, fast = head, head
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
@@ -14,8 +14,8 @@ class Solution:
         while curr:
             curr.next, prev, curr = prev, curr, curr.next
 
-        res = 0
         first, second = head, prev
+        res = 0
         while first and second:
             res = max(res, first.val + second.val)
             first = first.next
