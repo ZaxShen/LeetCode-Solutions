@@ -1,6 +1,7 @@
 class Solution:
     def isPathCrossing(self, path: str) -> bool:
-        x, y = 0, 0
+        # x, y = 0, 0
+        x = y = 0
         visited = {(x, y)}
 
         for move in path:
