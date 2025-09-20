@@ -1,12 +1,13 @@
-from collections import defaultdict
+from collections import Counter
 
 class Solution:
     def numIdenticalPairs(self, nums: List[int]) -> int:
-        d = defaultdict(int)
-
+        count = Counter(nums)
         res = 0
+
         for num in nums:
-            res += d[num]
-            d[num] += 1
+            if num in count:
+                res += count[num] - 1
+                count[num] -= 1
 
         return res
