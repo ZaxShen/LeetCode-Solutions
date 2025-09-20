@@ -8,14 +8,12 @@ class Solution:
         # First window
         win_size = 2 * k + 1
         win_sum = sum(nums[:win_size])
-        win_avg = win_sum // win_size
         res = [-1] * len(nums)
-        res[k] = win_avg
+        res[k] = win_sum // win_size
 
         # Slide window
         for i in range(win_size, len(nums)):
             win_sum += nums[i] - nums[i - win_size]
-            win_avg = win_sum // win_size
-            res[i - k] = win_avg
+            res[i - k] = win_sum // win_size
 
         return res
