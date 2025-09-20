@@ -2,4 +2,13 @@ from collections import Counter
 
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        return not Counter(ransomNote) - Counter(magazine)
+        if len(ransomNote) > len(magazine):
+            return False
+
+        count = Counter(magazine)
+        for char in ransomNote:
+            count[char] -= 1
+            if count[char] == -1:
+                return False
+
+        return True
