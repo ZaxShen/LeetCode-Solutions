@@ -1,15 +1,4 @@
-  SELECT
-      contest_id,
-      ROUND(
-          COUNT(*)::DECIMAL / (
-              SELECT COUNT(*) FROM Users
-          ) * 100,
-          2
-      ) AS percentage
-  FROM
-      register
-  GROUP BY
-      contest_id
-  ORDER BY
-      percentage DESC,
-      contest_id ASC
+select contest_id, round(count(*)::DECIMAL / (select count(user_id) from users) * 100, 2) as percentage
+from register
+group by contest_id
+order by percentage desc, contest_id asc
