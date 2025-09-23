@@ -2,10 +2,13 @@ from collections import Counter
 
 class Solution:
     def equalPairs(self, grid: List[List[int]]) -> int:
-        cols = Counter(tuple(col) for col in zip(*grid))
+        cols = zip(*grid)
+        col_count = Counter(cols)
 
         res = 0
-        for pattern in grid:
-            res += cols[tuple(pattern)]
+        for row in grid:
+            row = tuple(row)
+            if row in col_count:
+                res += col_count[row]
 
         return res
