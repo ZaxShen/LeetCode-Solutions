@@ -1,13 +1,10 @@
+from itertools import accumulate
+
 class NumArray:
 
     def __init__(self, nums: List[int]):
         self.nums = nums
-        
-        prefix = 0
-        self.acc = []
-        for num in nums:
-            prefix += num
-            self.acc.append(prefix)
+        self.acc = tuple(accumulate(nums))
 
     def sumRange(self, left: int, right: int) -> int:
         return self.acc[right] - self.acc[left] + self.nums[left]
