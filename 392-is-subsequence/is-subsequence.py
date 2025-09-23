@@ -6,11 +6,11 @@ class Solution:
             return False
 
         i = 0
-        for j in range(len(t)):
+        for char in t:
             # Early termination
             if i == len(s):
                 return True
-            if s[i] == t[j]:
+            if s[i] == char:
                 i += 1
             
         return i == len(s)
