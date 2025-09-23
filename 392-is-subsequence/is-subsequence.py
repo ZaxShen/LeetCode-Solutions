@@ -1,14 +1,15 @@
 class Solution:
+    # O(n), O(1)
     def isSubsequence(self, s: str, t: str) -> bool:
         # Handle edge cases
         if len(s) > len(t):
             return False
 
-        i, j = 0, 0
+        i = 0
         for j in range(len(t)):
+            # Early termination
             if i == len(s):
                 return True
-            # if i < len(s) and s[i] == t[j]:
             if s[i] == t[j]:
                 i += 1
             
