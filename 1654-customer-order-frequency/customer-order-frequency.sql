@@ -1,5 +1,5 @@
 WITH
-    qualifying_months AS (
+    customer_spend AS (
         SELECT
             o.customer_id,
             c.name,
@@ -23,7 +23,7 @@ SELECT
     customer_id,
     NAME
 FROM
-    qualifying_months
+    customer_spend
 GROUP BY
     customer_id,
     NAME
