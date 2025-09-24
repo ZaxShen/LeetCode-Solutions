@@ -1,5 +1,11 @@
-select customer_id, customer_name
-from Customers
-where customer_id in (select customer_id from Orders where product_name = 'A')
-    and customer_id in (select customer_id from Orders where product_name = 'B')
-    and customer_id not in (select customer_id from Orders where product_name = 'C')
+select
+    c.customer_id,
+    c.customer_name
+from Customers c
+join Orders o using(customer_id)
+group by c.customer_id, c.customer_name
+having
+    sum(case when o.product_name = 'A' then 1 else 0 end) > 0
+    and sum(case when o.product_name = 'B' then 1 else 0 end) > 0
+    and sum(case when o.product_name = 'C' then 1 else 0 end) = 0
+order by c.customer_id
