@@ -1,6 +1,6 @@
-select country.name as country
-from calls
-join person on person.id in (calls.caller_id, calls.callee_id)
-join country on substring(person.phone_number, 1, 3) = country.country_code
-group by country.name
-having avg(duration) > (select avg(duration) from calls)
+select co.name as country
+from Calls ca
+    join Person p on p.id in (ca.caller_id, ca.callee_id)
+    join Country co on co.country_code = SUBSTRING(p.phone_number, 1, 3)
+group by co.name
+    having avg(ca.duration) > (select avg(duration) from Calls)
