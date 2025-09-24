@@ -3,10 +3,10 @@ from collections import Counter
 class Solution:
     def frequencySort(self, s: str) -> str:
         count = Counter(s)
-
+        sorted_count = sorted(count, key=count.get, reverse=True)
         res = []
 
-        for k in sorted(count, key=count.get, reverse=True):
+        for k in sorted_count:
             res.append(k * count[k])
-            
-        return ''.join(res)
+
+        return "".join(res)
