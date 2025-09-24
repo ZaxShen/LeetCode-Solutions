@@ -5,4 +5,10 @@ class Solution:
         if len(ransomNote) > len(magazine):
             return False
 
-        return Counter(ransomNote) <= Counter(magazine)
+        count = Counter(magazine)
+        for char in ransomNote:
+            count[char] -= 1
+            if count[char] < 0:
+                return False
+
+        return True
