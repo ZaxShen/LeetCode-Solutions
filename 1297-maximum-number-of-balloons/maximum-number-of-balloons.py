@@ -1,9 +1,18 @@
 class Solution:
     def maxNumberOfBalloons(self, text: str) -> int:
-        count = {"b": 0, "a": 0, "l": 0, "o": 0, "n": 0}
+        balloon = {
+            "b": 0,
+            "a": 0,
+            "l": 0,
+            "o": 0,
+            "n": 0
+        }
 
         for char in text:
-            if char in count:
-                count[char] += 1
+            if char in balloon:
+                balloon[char] += 1
 
-        return min(count[min(count, key=count.get)], min(count["o"] // 2, count["l"] // 2))
+        ban = min(balloon['b'], balloon['a'], balloon['n'])
+        lo = min(balloon['l'], balloon['o']) // 2
+        
+        return min(ban, lo)
