@@ -1,13 +1,11 @@
 class Solution:
     def maxPower(self, s: str) -> int:
-        max_power = power = 0
+        res = count = 1
+        for i in range(len(s) - 1):
+            if s[i] == s[i + 1]:
+                count += 1
+            else:
+                count = 1
+            res = max(res, count)
 
-        left = 0
-        for _ in range(len(s)):
-            right = left
-            while right < len(s) and s[left] == s[right]:
-                right += 1
-            max_power = max(max_power, right - left)
-            left = right
-
-        return max_power
+        return res
