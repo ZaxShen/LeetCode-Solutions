@@ -1,11 +1,14 @@
+from itertools import accumulate
+
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
         total = sum(nums)
-        prefix = 0
+        acc = tuple(accumulate(nums))
 
-        for i, num in enumerate(nums):
-            prefix += num
-            if prefix - num == total - prefix:
+        for i in range(len(nums)):
+            left_sec = acc[i] - nums[i]
+            right_sec = total - acc[i]
+            if left_sec == right_sec:
                 return i
 
         return -1
