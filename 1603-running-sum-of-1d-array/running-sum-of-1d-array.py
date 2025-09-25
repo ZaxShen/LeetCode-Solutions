@@ -1,5 +1,9 @@
-from itertools import accumulate
-
 class Solution:
     def runningSum(self, nums: List[int]) -> List[int]:
-        return list(accumulate(nums))
+        prefix = 0
+        res = []
+        for num in nums:
+            prefix += num
+            res.append(prefix)
+
+        return res
