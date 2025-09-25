@@ -1,9 +1,9 @@
 class Solution:
-    # O(n), O(1)
     def reverseOnlyLetters(self, s: str) -> str:
         s = list(s)
 
         left, right = 0, len(s) - 1
+
         while left <= right:
             if s[left].isalpha() == False:
                 left += 1
