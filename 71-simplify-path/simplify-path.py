@@ -4,9 +4,12 @@ class Solution:
         stack = []
 
         for p in path:
-            if stack and p == '..':
-                stack.pop()
-            elif p not in ('.', '..'):
+            if p == '.':
+                continue
+            elif p == '..':
+                if stack:
+                    stack.pop()
+            else:
                 stack.append(p)
 
         return '/' + '/'.join(stack)
