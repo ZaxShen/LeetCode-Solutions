@@ -1,6 +1,7 @@
 class Solution:
+    # O(n), O(n)
     def simplifyPath(self, path: str) -> str:
-        path = list(filter(None, path.split('/')))
+        path = path.split('/')
         stack = []
 
         for p in path:
@@ -9,7 +10,8 @@ class Solution:
             elif p == '..':
                 if stack:
                     stack.pop()
-            else:
+            elif p != '':
                 stack.append(p)
 
         return '/' + '/'.join(stack)
+        
