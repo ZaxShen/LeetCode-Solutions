@@ -3,12 +3,11 @@ class Solution:
         def helper(sentence: str) -> str:
             stack = []
             for char in sentence:
-                if char == '#':
-                    if stack:
-                        stack.pop()
-                else:
+                if char != '#':
                     stack.append(char)
+                elif stack:
+                    stack.pop()
 
-            return stack
+            return ''.join(stack)
 
         return helper(s) == helper(t)
