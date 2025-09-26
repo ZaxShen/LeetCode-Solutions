@@ -2,7 +2,6 @@ class Solution:
     def makeGood(self, s: str) -> str:
         stack = []
         for char in s:
-            print(stack)
             if stack and stack[-1] != char and stack[-1].lower() == char.lower():
                 stack.pop()
             else:
