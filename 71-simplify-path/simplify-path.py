@@ -5,12 +5,10 @@ class Solution:
         stack = []
 
         for p in path:
-            if p == '.':
-                continue
-            elif p == '..':
+            if p == '..':
                 if stack:
                     stack.pop()
-            elif p != '':
+            elif p not in ('', '.'):
                 stack.append(p)
 
         return '/' + '/'.join(stack)
