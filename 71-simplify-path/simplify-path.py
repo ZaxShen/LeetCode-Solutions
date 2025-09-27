@@ -4,16 +4,10 @@ class Solution:
         stack = []
 
         for p in path:
-            # ..
-            # . ''
-            # word
             if p == '..':
                 if stack:
                     stack.pop()
-            elif p in ('', '.'):
-                continue
-            else:
+            elif p not in ('', '.'):
                 stack.append(p)
-
 
         return '/' + '/'.join(stack)
