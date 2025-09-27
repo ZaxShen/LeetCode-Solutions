@@ -1,23 +1,19 @@
 class Solution:
-    # O(n), O(n)
     def sumSubarrayMins(self, arr: List[int]) -> int:
         MOD = 10 ** 9 + 7
-        sum_mins = [0] * len(arr)
         stack = []
+        mins_sum = [0] * len(arr)
 
         for i, v in enumerate(arr):
-            # Maintain stack in asc order
+            # Asc stack
             while stack and arr[stack[-1]] > v:
                 stack.pop()
 
-            # v is not the minimum for current subarrys
             if stack:
-                sum_mins[i] = sum_mins[stack[-1]] + v * (i - stack[-1])
-            # v is the minimum for current subarrys
+                prev_sum = mins_sum[stack[-1]]
+                mins_sum[i] = prev_sum + v * (i - stack[-1])
             else:
-                sum_mins[i] = v * (i + 1)
-
-            # Append stack
+                mins_sum[i] = v * (i + 1)
             stack.append(i)
 
-        return sum(sum_mins) % MOD
+        return sum(mins_sum) % MOD
