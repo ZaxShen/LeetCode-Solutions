@@ -5,10 +5,10 @@ class Solution:
         if len(word1) != len(word2):
             return False
 
-        if set(word1) != set(word2):
+        c1 = Counter(word1)
+        c2 = Counter(word2)
+
+        if c1.keys() != c2.keys():
             return False
 
-        return sorted(Counter(word1).values()) == sorted(Counter(word2).values())
-
-        # 0, 1, 222, 1
-        # 0, 11, 222
+        return sorted(c1.values()) == sorted(c2.values())
