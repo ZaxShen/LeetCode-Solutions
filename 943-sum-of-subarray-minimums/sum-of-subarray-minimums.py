@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(n)
     def sumSubarrayMins(self, arr: List[int]) -> int:
         MOD = 10 ** 9 + 7
         sum_mins = [0] * len(arr)
