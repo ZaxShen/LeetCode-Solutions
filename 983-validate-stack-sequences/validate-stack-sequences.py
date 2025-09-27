@@ -1,12 +1,14 @@
 class Solution:
+    # O(n), O(n)
     def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
         stack = []
-        j = 0
+        i = 0
 
-        for i in pushed:
-            stack.append(i)
-            while stack and stack[-1] == popped[j]:
+        for num in pushed:
+            stack.append(num)
+            while stack and stack[-1] == popped[i]:
                 stack.pop()
-                j += 1
+                i += 1
 
         return not stack
+        
