@@ -1,10 +1,9 @@
-WITH
-    salary_rank AS (
-        SELECT
-            salary,
-            DENSE_RANK() OVER (ORDER BY salary DESC) AS salary_desc
-        FROM employee
-    )
-SELECT MAX(salary) AS SecondHighestSalary
-FROM salary_rank
-WHERE salary_desc = 2
+with salary_rank as (
+    select
+        salary,
+        dense_rank() over(order by salary desc) as salary_desc
+    from Employee
+)
+select max(salary) as SecondHighestSalary
+from salary_rank
+where salary_desc = 2
