@@ -1,16 +1,15 @@
 CREATE OR REPLACE FUNCTION NthHighestSalary(N INT) RETURNS TABLE (Salary INT) AS $$
 BEGIN
   RETURN QUERY (
-    WITH salary_rank AS (
-        SELECT DISTINCT
+    with salary_rank as (
+        select distinct
             e.salary,
-            DENSE_RANK() OVER(ORDER BY e.salary DESC) AS salary_desc
-        FROM Employee e
+            dense_rank() over(order by e.salary desc) as salary_desc
+        from Employee e
     )
-    SELECT sr.salary
-    FROM salary_rank sr
-    WHERE sr.salary_desc = N
-    -- LIMIT 1
+    select sr.salary
+    from salary_rank sr
+    where sr.salary_desc = N
   );
 END;
 $$ LANGUAGE plpgsql;
