@@ -1,13 +1,11 @@
--- count employee_id by project_id
--- get the max
-
-with project_emp_rank as (
+with cte as (
     select
-        project_id,
-        dense_rank() over(order by count(*) desc) as project_desc
-    from Project
-    group by project_id
+        p.project_id,
+        dense_rank() over(order by count(*) desc) as emp_count_desc
+    from Project p
+        join Employee e using (employee_id)
+    group by p.project_id
 )
 select project_id
-from project_emp_rank
-where project_desc = 1
+from cte
+where emp_count_desc = 1
