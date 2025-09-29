@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 class Solution:
     # O(n), O(n)
@@ -6,7 +6,8 @@ class Solution:
         d = defaultdict(list)
         
         for word in strs:
-            key = tuple(sorted(word))
+            count = Counter(word)
+            key = tuple(sorted(count.items()))
             d[key].append(word)
 
         return list(d.values())
