@@ -3,14 +3,15 @@ from collections import deque
 class RecentCounter:
 
     def __init__(self):
-        self.queue = deque()
+        self.q = deque()
 
     def ping(self, t: int) -> int:
-        self.queue.append(t)
-        while self.queue[0] < t - 3000:
-            self.queue.popleft()
+        q = self.q
+        q.append(t)
+        while q and q[0] < t - 3000:
+            q.popleft()
 
-        return len(self.queue)
+        return len(q)
 
 
 # Your RecentCounter object will be instantiated and called as such:
