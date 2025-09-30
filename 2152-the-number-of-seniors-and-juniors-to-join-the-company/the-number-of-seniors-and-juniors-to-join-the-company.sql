@@ -1,31 +1,26 @@
-WITH cumulative_costs AS (
-    SELECT
-        employee_id,
-        experience,
-        salary,
-        SUM(salary) OVER(
-            PARTITION BY experience 
-            ORDER BY salary ASC, employee_id ASC
-        ) AS running_total
-    FROM Candidates
-),
-seniors_hired AS (
-    SELECT 
-        COUNT(*) AS senior_count,
-        COALESCE(MAX(running_total), 0) AS senior_spent
-    FROM cumulative_costs
-    WHERE experience = 'Senior' 
-        AND running_total <= 70000
-)
-SELECT 
+WITH
+    cte AS (
+        SELECT
+            *,
+            SUM(salary) OVER (PARTITION BY experience ORDER BY salary ASC, employee_id ASC) AS total_salary
+        FROM Candidates
+    ),
+    hired_seniors AS (
+        SELECT COALESCE(total_salary, 0) AS total_salary
+        FROM cte
+        WHERE
+            experience = 'Senior'
+            AND total_salary <= 70000
+    )
+SELECT
     'Senior' AS experience,
-    senior_count AS accepted_candidates
-FROM seniors_hired
+    COUNT(*) AS accepted_candidates
+FROM hired_seniors
 UNION ALL
-SELECT 
+SELECT
     'Junior' AS experience,
     COUNT(*) AS accepted_candidates
-FROM cumulative_costs
-CROSS JOIN seniors_hired
-WHERE experience = 'Junior'
-    AND running_total <= 70000 - senior_spent;
+FROM cte
+WHERE
+    experience = 'Junior'
+    AND total_salary <= 70000 - (SELECT COALESCE(MAX(total_salary), 0) FROM hired_seniors)
