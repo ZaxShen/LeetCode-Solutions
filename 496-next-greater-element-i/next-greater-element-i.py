@@ -1,9 +1,8 @@
 class Solution:
-    # O(n), O(n)
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        res = [-1] * len(nums1)
         hashmap = {}
         ds = []
+        res = [-1] * len(nums1)
 
         for v in nums2:
             while ds and ds[-1] < v:
