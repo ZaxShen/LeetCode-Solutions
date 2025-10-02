@@ -1,26 +1,31 @@
-WITH
-    cte AS (
-        SELECT
-            *,
-            SUM(salary) OVER (PARTITION BY experience ORDER BY salary ASC, employee_id ASC) AS total_salary
-        FROM Candidates
-    ),
-    hired_seniors AS (
-        SELECT COALESCE(total_salary, 0) AS total_salary
-        FROM cte
-        WHERE
-            experience = 'Senior'
-            AND total_salary <= 70000
-    )
-SELECT
+with acc_salary as (
+    select
+        employee_id,
+        experience,
+        salary,
+        sum(salary) over(partition by experience order by salary, employee_id) as acc_salary
+    from Candidates
+    group by employee_id, experience, salary
+), hired_seniors as (
+    select
+        experience,
+        coalesce(acc_salary, 0) as acc_salary
+    from acc_salary
+    where experience = 'Senior'
+        and acc_salary <= 70000
+)
+select
     'Senior' AS experience,
-    COUNT(*) AS accepted_candidates
-FROM hired_seniors
-UNION ALL
-SELECT
-    'Junior' AS experience,
-    COUNT(*) AS accepted_candidates
-FROM cte
-WHERE
+    count(*) as accepted_candidates
+from hired_seniors
+union all
+select
+    'Junior' as experience,
+    count(*) as accepted_candidates
+from acc_salary
+where
     experience = 'Junior'
-    AND total_salary <= 70000 - (SELECT COALESCE(MAX(total_salary), 0) FROM hired_seniors)
+    and acc_salary <= 70000 - (
+        select coalesce(max(acc_salary), 0)
+        from hired_seniors
+    )
