@@ -3,4 +3,4 @@ select
     patient_name,
     conditions
 from Patients
-where conditions ~ '(^|[*[:space:]])DIAB1'
+where conditions ~ '(^|[\ ])DIAB1'
