@@ -1,20 +1,18 @@
-WITH
-    cte AS (
-        SELECT
-            r1.user_id AS user1_id,
-            r2.user_id AS user2_id,
-            COUNT(*) AS common_followers,
-            DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS common_followers_desc
-        FROM
-            Relations r1
-            JOIN Relations r2 ON r1.follower_id = r2.follower_id
-            AND r1.user_id < r2.user_id
-        GROUP BY
-            r1.user_id,
-            r2.user_id
-    )
-SELECT
+with cte as (
+    select
+        r1.user_id as user1_id,
+        r2.user_id as user2_id,
+        dense_rank() over(order by count(*) desc) as followers_desc
+    from Relations r1
+        -- join Relations r2 using (follower_id)
+        join Relations r2 on r1.follower_id = r2.follower_id
+            and r1.user_id < r2.user_id
+    group by
+        r1.user_id,
+        r2.user_id
+)
+select
     user1_id,
     user2_id
-FROM cte
-WHERE common_followers_desc = 1
+from cte
+where followers_desc = 1
