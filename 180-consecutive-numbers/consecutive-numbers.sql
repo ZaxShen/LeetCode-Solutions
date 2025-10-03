@@ -1,12 +1,10 @@
-WITH cte AS (
-    SELECT 
-        id,
-        num,
-        id - DENSE_RANK() OVER(PARTITION BY num ORDER BY id ASC) AS diff
-    FROM Logs
+with cte as (
+    select
+        *,
+        id - rank() over (partition by num order by id) as grp
+    from Logs
 )
--- select * from cte;
-SELECT DISTINCT num AS ConsecutiveNums
-FROM cte
-GROUP BY num, diff
-HAVING COUNT(*) >= 3;
+select distinct num as ConsecutiveNums
+from cte
+group by num, grp
+    having count(*) >= 3
