@@ -2,7 +2,7 @@ WITH cte AS (
     SELECT 
         id,
         num,
-        id - ROW_NUMBER() OVER(PARTITION BY num ORDER BY id ASC) AS diff
+        id - RANK() OVER(PARTITION BY num ORDER BY id ASC) AS diff
     FROM Logs
 )
 -- select * from cte;
