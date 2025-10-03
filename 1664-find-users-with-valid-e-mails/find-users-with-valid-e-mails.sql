@@ -1,7 +1,3 @@
-select
-    user_id,
-    "name",
-    mail
+select *
 from Users
--- where mail ~ '^[[:alpha:]][[:alnum:]_.-]*(@leetcode\.com)$'
-WHERE mail ~ '^[a-zA-Z][A-Za-z0-9_.-]*@leetcode\.com$'
+where mail ~ '^[A-Za-z][A-Za-z0-9_.-]*@leetcode\.com$'
