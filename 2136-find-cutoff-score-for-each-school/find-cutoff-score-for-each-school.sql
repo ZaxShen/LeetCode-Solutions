@@ -1,6 +1,8 @@
--- Write your PostgreSQL query statement below
-select school_id, coalesce(min(score), -1) as score
-from Schools
-left join Exam
-    on capacity >= student_count
-group by school_id
+SELECT
+    school_id,
+    COALESCE(MIN(score), -1) AS score
+FROM
+    Schools
+    LEFT JOIN Exam ON capacity >= student_count
+GROUP BY
+    school_id
