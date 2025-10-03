@@ -1,10 +1,12 @@
-with cte as (
-    select
+WITH cte AS (
+    SELECT 
+        id,
         num,
-        lag(num, 1) over() as lag_1,
-        lag(num, 2) over() as lag_2
-    from logs
+        id - ROW_NUMBER() OVER(PARTITION BY num ORDER BY id ASC) AS diff
+    FROM Logs
 )
-select distinct num as ConsecutiveNums
-from cte
-where num = lag_1 and num = lag_2
+-- select * from cte;
+SELECT DISTINCT num AS ConsecutiveNums
+FROM cte
+GROUP BY num, diff
+HAVING COUNT(*) >= 3;
