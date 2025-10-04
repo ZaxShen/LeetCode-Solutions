@@ -1,11 +1,10 @@
 with cte as (
     select
-        id,
-        num,
-        lag(num, 1) over() as lag_1,
-        lag(num, 2) over() as lag_2
-    from logs
+        *,
+        id - rank() over(partition by num order by id) as grp
+    from Logs
 )
-select distinct num as ConsecutiveNums
+SELECT DISTINCT num AS ConsecutiveNums
 from cte
-where num = lag_1 and num = lag_2
+group by num, grp
+    having count(*) >= 3
