@@ -3,5 +3,5 @@ select
 from Sales s
     join Product p on s.product_id = p.product_id
 group by s.buyer_id
-having SUM((product_name = 'iPhone')::int) = 0
-    and SUM((product_name = 'S8')::int) > 0
+having COUNT(*) filter (where product_name = 'iPhone') = 0
+    and COUNT(*) filter (where product_name = 'S8') > 0
