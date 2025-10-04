@@ -6,6 +6,7 @@ with bins as (
 ),
 categorized as (
     select
+        *,
         case
             when duration/60 < 5 THEN '[0-5>'
             when duration/60 < 10 THEN '[5-10>'
@@ -16,7 +17,7 @@ categorized as (
 )
 select
     b.bin,
-    count(c.bin) as total
+    count(c.session_id) as total
 from bins b
 left join categorized c on b.bin = c.bin
 group by b.bin, b.bin_order
