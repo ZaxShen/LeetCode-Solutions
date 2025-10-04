@@ -1,23 +1,23 @@
-WITH bins AS (
-    SELECT '[0-5>' AS bin, 1 AS bin_order
-    UNION ALL SELECT '[5-10>', 2
-    UNION ALL SELECT '[10-15>', 3
-    UNION ALL SELECT '15 or more', 4
+with bins as (
+    select '[0-5>' as bin, 1 as bin_order
+    union all select '[5-10>', 2
+    union all select '[10-15>', 3
+    union all select '15 or more', 4
 ),
-categorized AS (
-    SELECT 
-        CASE 
-            WHEN duration / 60 < 5 THEN '[0-5>'
-            WHEN duration / 60 < 10 THEN '[5-10>'
-            WHEN duration / 60 < 15 THEN '[10-15>'
-            ELSE '15 or more'
-        END AS bin
-    FROM Sessions
+categorized as (
+    select
+        case
+            when duration/60 < 5 THEN '[0-5>'
+            when duration/60 < 10 THEN '[5-10>'
+            when duration/60 < 15 THEN '[10-15>'
+            else '15 or more'
+        end as bin
+    from Sessions
 )
-SELECT 
+select
     b.bin,
-    COALESCE(COUNT(c.bin), 0) AS total
-FROM bins b
-LEFT JOIN categorized c ON b.bin = c.bin
-GROUP BY b.bin, b.bin_order
-ORDER BY b.bin_order
+    count(c.bin) as total
+from bins b
+left join categorized c on b.bin = c.bin
+group by b.bin, b.bin_order
+order by b.bin_order
