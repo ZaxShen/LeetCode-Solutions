@@ -1,7 +1,5 @@
-select
+SELECT
     player_id,
     event_date,
-    sum(games_played) over(partition by player_id order by event_date) as games_played_so_far
-from Activity
-group by player_id, event_date
-order by player_id, event_date
+    SUM(games_played) OVER (PARTITION BY player_id ORDER BY event_date) AS games_played_so_far
+FROM Activity
