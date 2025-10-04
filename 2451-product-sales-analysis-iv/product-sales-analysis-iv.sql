@@ -1,16 +1,18 @@
-with cte as (
-    select
-        s.user_id,
-        s.product_id,
-        dense_rank() over(partition by s.user_id order by sum(s.quantity * p.price) desc) as amount_desc
-    from Sales s
-        join Product p on s.product_id = p.product_id
-    group by
-        s.user_id,
-        s.product_id
-)
-select
+WITH
+    cte AS (
+        SELECT
+            s.user_id,
+            s.product_id,
+            DENSE_RANK() OVER (PARTITION BY s.user_id ORDER BY SUM(s.quantity * p.price) DESC) AS amount_desc
+        FROM
+            Sales s
+            JOIN Product p ON s.product_id = p.product_id
+        GROUP BY
+            s.user_id,
+            s.product_id
+    )
+SELECT
     user_id,
     product_id
-from cte
-where amount_desc = 1
+FROM cte
+WHERE amount_desc = 1
