@@ -1,7 +1,10 @@
-select
+SELECT
     s.user_id,
-    sum(s.quantity * p.price) as spending
-from Sales s
-    join Product p on s.product_id = p.product_id
-group by s.user_id
-order by spending desc, user_id asc
+    SUM(s.quantity * p.price) AS spending
+FROM
+    Sales s
+    JOIN Product p ON s.product_id = p.product_id
+GROUP BY user_id
+ORDER BY
+    spending DESC,
+    user_id ASC
