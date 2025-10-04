@@ -7,6 +7,5 @@ group by
     s.product_id,
     p.product_name
 having
-    count(*) filter(where s.sale_date between '2019-01-01' and '2019-03-31') > 0
-    and count(*) filter(where s.sale_date < '2019-01-01') = 0
-    and count(*) filter(where s.sale_date > '2019-03-31') = 0
+    MIN(s.sale_date) >= '2019-01-01'
+    and max(s.sale_date) <= '2019-03-31'
