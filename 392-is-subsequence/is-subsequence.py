@@ -3,13 +3,11 @@ class Solution:
         if len(s) > len(t):
             return False
         
-        i = 0
-        for j in range(len(t)):
-            if len(s) == i:
-                return True
-            if s[i] == t[j]:
-                i += 1
+        si = ti = 0
+        while si < len(s) and ti < len(t):
+            if s[si] == t[ti]:
+                si += 1
+            ti += 1
 
-        return i == len(s)
-
+        return len(s) == si
 
