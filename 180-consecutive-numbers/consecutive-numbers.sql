@@ -4,7 +4,7 @@ with cte as (
         id - rank() over(partition by num order by id) as grp
     from Logs
 )
-SELECT DISTINCT num AS ConsecutiveNums
+select distinct num as ConsecutiveNums
 from cte
 group by num, grp
     having count(*) >= 3
