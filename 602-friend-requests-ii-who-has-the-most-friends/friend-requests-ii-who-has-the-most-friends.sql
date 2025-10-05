@@ -1,8 +1,10 @@
 with cte as (
-    select requester_id as id
+    select
+        requester_id as id
     from RequestAccepted
-    UNION all
-    select accepter_id
+    union all
+    select
+        accepter_id as id
     from RequestAccepted
 )
 select
