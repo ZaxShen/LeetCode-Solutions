@@ -1,32 +1,29 @@
-with cte1 as (
-    select
-        user_id,
-        credit
-    from Users
-    union all
-    select
-        paid_by,
-        -amount
-    from Transactions
-    union all
-    select
-        paid_to,
-        amount
-    from Transactions
-), cte2 as (
-select
+WITH all_credits AS (
+    -- Initial credits
+    SELECT user_id, credit FROM Users
+    
+    UNION ALL
+    
+    -- Money paid (negative)
+    SELECT paid_by, -amount FROM Transactions
+    
+    UNION ALL
+    
+    -- Money received (positive)
+    SELECT paid_to, amount FROM Transactions
+)
+SELECT
     u.user_id,
     u.user_name,
-    sum(coalesce(c.credit, u.credit)) as credit
-from
+    SUM(ac.credit) AS credit,
+    CASE
+        WHEN SUM(ac.credit) < 0 THEN 'Yes'
+        ELSE 'No'
+    END AS credit_limit_breached
+FROM
     Users u
-    left join cte1 c on u.user_id = c.user_id
-group by u.user_id, u.user_name
-)
-select
-    *,
-    case
-        when credit < 0 then 'Yes'
-        else 'No'
-    end as credit_limit_breached
-from cte2
+    LEFT JOIN all_credits ac ON u.user_id = ac.user_id
+GROUP BY
+    u.user_id, u.user_name
+ORDER BY
+    u.user_id;
