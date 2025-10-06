@@ -1,19 +1,19 @@
-WITH latest_prices AS (
-    SELECT
+with cte as (
+    select
         product_id,
         new_price,
-        ROW_NUMBER() OVER(PARTITION BY product_id ORDER BY change_date DESC) as rn
-    FROM Products
-    WHERE change_date <= '2019-08-16'
-),
-all_products AS (
-    SELECT DISTINCT product_id 
-    FROM Products
+        ROW_NUMBER() OVER(partition by product_id order by change_date desc) as rn
+    from Products
+    where change_date <= '2019-08-16'::DATE
 )
-SELECT
-    ap.product_id,
-    COALESCE(lp.new_price, 10) as price
-FROM all_products ap
-LEFT JOIN latest_prices lp 
-    ON ap.product_id = lp.product_id 
-    AND lp.rn = 1;
+select
+    product_id,
+    new_price as price
+from cte
+where rn = 1
+union
+select
+    product_id,
+    10 as price
+from Products
+where product_id not in (select distinct product_id from cte)
