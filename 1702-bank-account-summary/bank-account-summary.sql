@@ -24,6 +24,6 @@ FROM
     Users u
     LEFT JOIN all_credits ac ON u.user_id = ac.user_id
 GROUP BY
-    u.user_id, u.user_name
-ORDER BY
-    u.user_id;
+    u.user_id,
+    u.user_name
+ORDER BY u.user_id
