@@ -1,8 +1,8 @@
-select
+SELECT
     actor_id,
     director_id
-from ActorDirector
-group by
+FROM ActorDirector
+GROUP BY
     actor_id,
     director_id
-    having count(*) >= 3
+HAVING COUNT(*) >= 3
