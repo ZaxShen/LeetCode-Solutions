@@ -1,21 +1,23 @@
-with cte as (
-    select
+WITH cte AS (
+    SELECT
         o.customer_id,
         o.product_id,
         p.product_name,
-        dense_rank() over(partition by o.customer_id order by count(o.order_id) desc) as order_count_desc
-    from
+        DENSE_RANK() OVER (PARTITION BY o.customer_id ORDER BY COUNT(o.order_id) DESC) AS order_count_desc
+    FROM
         Orders o
-        join Customers c on o.customer_id = c.customer_id
-        join Products p on o.product_id = p.product_id
-    group by o.customer_id, o.product_id, p.product_name
+        JOIN Products p ON o.product_id = p.product_id
+    GROUP BY
+        o.customer_id,
+        o.product_id,
+        p.product_name
 )
-select
+SELECT
     customer_id,
     product_id,
     product_name
-from cte
-where order_count_desc = 1
+FROM cte
+WHERE order_count_desc = 1
 ORDER BY
     product_name,
     product_id,
