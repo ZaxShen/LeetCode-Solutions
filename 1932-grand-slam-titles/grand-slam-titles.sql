@@ -1,19 +1,19 @@
-with cte as (
-    select Wimbledon as grand_slam from Championships
-    union all
-    select Fr_open as grand_slam from Championships
-    union all
-    select US_open as grand_slam from Championships
-    union all
-    select Au_open as grand_slam from Championships
+WITH cte AS (
+    SELECT Wimbledon AS grand_slam FROM Championships
+    UNION ALL
+    SELECT Fr_open AS grand_slam FROM Championships
+    UNION ALL
+    SELECT US_open AS grand_slam FROM Championships
+    UNION ALL
+    SELECT Au_open AS grand_slam FROM Championships
 )
-select
+SELECT
     p.player_id,
     p.player_name,
-    count(grand_slam) as grand_slams_count
-from
+    COUNT(grand_slam) AS grand_slams_count
+FROM
     Players p
-    join cte c on p.player_id = c.grand_slam
-group by
+    JOIN cte c ON p.player_id = c.grand_slam
+GROUP BY
     p.player_id,
     p.player_name
