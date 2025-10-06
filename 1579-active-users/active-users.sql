@@ -1,21 +1,15 @@
-WITH
-    cte AS (
-        SELECT
-            id,
-            login_date - INTERVAL '1 day' * ROW_NUMBER() OVER (
-                PARTITION BY id ORDER BY login_date
-            ) AS grp
-        FROM (SELECT DISTINCT id, login_date FROM Logins)
-    )
-SELECT DISTINCT
-    cte.id,
+with cte as (
+    select
+        id,
+        login_date - interval '1 day' * row_number() over(partition by id order by login_date) as grp
+    from (select distinct * from Logins)
+)
+select distinct
+    c.id,
     a.name
-FROM
-    cte
-    JOIN Accounts a ON cte.id = a.id
-GROUP BY
-    cte.id,
-    a.name,
-    grp
-HAVING COUNT(grp) >= 5
-ORDER BY cte.id
+from
+    cte c
+    left join Accounts a on c.id = a.id
+group by c.id, a.name, c.grp
+having count(c.id) >= 5
+order by c.id
