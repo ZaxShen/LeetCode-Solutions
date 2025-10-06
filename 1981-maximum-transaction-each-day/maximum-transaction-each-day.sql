@@ -1,7 +1,7 @@
 with cte as (
     select
         transaction_id,
-        dense_rank() over(partition by to_char(day, 'YYYY-MM-DD') order by amount desc) as amount_desc
+        dense_rank() over(partition by day::DATE order by amount desc) as amount_desc
     from Transactions
 )
 select transaction_id
