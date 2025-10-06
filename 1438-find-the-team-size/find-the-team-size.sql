@@ -1,4 +1,4 @@
-select
+SELECT
     employee_id,
-    count(*) over(partition by team_id) as team_size
-from Employee
+    COUNT(employee_id) OVER (PARTITION BY team_id) AS team_size
+FROM Employee
