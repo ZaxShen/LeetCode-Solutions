@@ -1,3 +1,3 @@
 select *
 from Users
-where mail ~ '^[A-Za-z][A-Za-z0-9_.-]*@leetcode\.com$'
+where mail ~ '^[A-Za-z][A-Z0-9a-z_.-]*@leetcode\.com$'
