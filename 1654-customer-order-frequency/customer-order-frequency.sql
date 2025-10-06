@@ -1,22 +1,20 @@
-with customer_spend as (
-select
-    c.customer_id,
-    c.name,
-    sum(p.price * o.quantity) as spend,
-    date_trunc('month', o.order_date) as year_month
-from orders o
-    join customers c using(customer_id)
-    join product p using(product_id)
-where
-    order_date >= '2020-06-01'::date
-    and order_date < '2020-08-01'::date
-group by
-    c.customer_id,
-    c.name,
-    date_trunc('month', o.order_date)
-    having sum(p.price * o.quantity) >= 100
+with cte as (
+    select
+        o.customer_id,
+        c.name,
+        to_char(o.order_date, 'YYYY-MM') as order_month,
+        sum(o.quantity * p.price) as total
+    from
+        Orders o
+        left join Customers c on o.customer_id = c.customer_id
+        left join Product p on o.product_id = p.product_id
+    where o.order_date between '2020-06-01'::DATE and '2020-07-31'::DATE
+    group by o.customer_id, c.name, to_char(o.order_date, 'YYYY-MM')
 )
-select customer_id, name
-from customer_spend
+select
+    customer_id,
+    name
+from cte
 group by customer_id, name
-    having count(*) = 2;
+    having count(*) = 2
+    and min(total) >= 100
