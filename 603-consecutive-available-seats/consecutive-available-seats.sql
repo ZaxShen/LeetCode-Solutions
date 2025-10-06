@@ -9,7 +9,7 @@ seat_counts AS (
     SELECT
         seat_id,
         grp,
-        COUNT(*) OVER (PARTITION BY grp) AS group_size
+        COUNT(seat_id) OVER (PARTITION BY grp) AS group_size
     FROM grouped_seats
 )
 SELECT seat_id
