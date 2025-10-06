@@ -1,22 +1,22 @@
-with recursive cte(task_id, subtask_id) as (
-    select
-        task_id,
-        1
-    from Tasks
-    union all
-    select
-        c.task_id,
-        c.subtask_id + 1
-    from cte c
-    join Tasks t using(task_id)
-    where c.subtask_id < t.subtasks_count
-)
-select
+WITH RECURSIVE
+    cte (task_id, subtask_id) AS (
+        SELECT task_id, 1
+        FROM Tasks
+        UNION
+        SELECT
+            c.task_id,
+            c.subtask_id + 1
+        FROM
+            cte c
+            JOIN Tasks t USING (task_id)
+        WHERE c.subtask_id < t.subtasks_count
+    )
+SELECT
     c.task_id,
     c.subtask_id
-from
+FROM
     cte c
-    left join Executed e on c.task_id = e.task_id
-        and c.subtask_id = e.subtask_id
-where e.subtask_id is NULL
-order by task_id
+    LEFT JOIN Executed e ON c.task_id = e.task_id
+    AND c.subtask_id = e.subtask_id
+WHERE e.subtask_id IS NULL
+ORDER BY task_id
