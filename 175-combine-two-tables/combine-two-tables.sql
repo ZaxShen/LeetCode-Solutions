@@ -1,5 +1,7 @@
--- Write your PostgreSQL query statement below
-select firstName, lastName, city, state
-from Person
-left join Address
-    using (personId)
+SELECT
+    firstName,
+    lastName,
+    city,
+    "state"
+FROM Person
+LEFT JOIN Address USING (personId)
