@@ -1,7 +1,6 @@
-select
-    p."name"
-from SalesPerson p
-where p.sales_id not in (
+select "name"
+from SalesPerson
+where sales_id not in (
     select o.sales_id
     from
         Orders o
