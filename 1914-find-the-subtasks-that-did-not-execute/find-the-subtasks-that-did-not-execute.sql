@@ -1,22 +1,10 @@
-WITH RECURSIVE
-    cte (task_id, subtask_id) AS (
-        SELECT task_id, 1
-        FROM Tasks
-        UNION
-        SELECT
-            c.task_id,
-            c.subtask_id + 1
-        FROM
-            cte c
-            JOIN Tasks t USING (task_id)
-        WHERE c.subtask_id < t.subtasks_count
-    )
-SELECT
-    c.task_id,
-    c.subtask_id
-FROM
-    cte c
-    LEFT JOIN Executed e ON c.task_id = e.task_id
-    AND c.subtask_id = e.subtask_id
-WHERE e.subtask_id IS NULL
-ORDER BY task_id
+select
+    t.task_id,
+    s.subtask_id
+from
+    Tasks t
+    cross join generate_series(1, t.subtasks_count) as s(subtask_id)
+    left join Executed e on t.task_id = e.task_id
+        and s.subtask_id = e.subtask_id
+where e.subtask_id is NULL
+order by task_id
