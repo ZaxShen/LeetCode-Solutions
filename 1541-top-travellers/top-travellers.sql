@@ -1,6 +1,6 @@
 select
     u.name,
-    sum(coalesce(distance, 0)) as travelled_distance
+    coalesce(sum(r.distance), 0) as travelled_distance
 from
     Users u
     left join Rides r on u.id = r.user_id
