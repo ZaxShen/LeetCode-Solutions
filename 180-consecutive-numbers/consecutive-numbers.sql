@@ -1,7 +1,7 @@
 with cte as (
     select
         *,
-        id - rank() over(partition by num order by id) as grp
+        id - row_number() over(partition by num order by id) as grp
     from Logs
 )
 select distinct num as ConsecutiveNums
