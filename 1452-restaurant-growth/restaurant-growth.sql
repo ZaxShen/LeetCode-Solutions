@@ -1,20 +1,21 @@
-with cte as (
-    select
-        visited_on,
-        sum(amount) as daily_amount
-    from Customer
-    group by visited_on
+WITH cte AS (
+	SELECT
+		visited_on,
+		SUM(amount) AS daily_total,
+		SUM(SUM(amount)) OVER (
+			ORDER BY visited_on 
+			ROWS BETWEEN 6 preceding AND CURRENT ROW
+		) AS rolling_sum_7d,
+		AVG(SUM(amount)) OVER (
+			ORDER BY visited_on 
+			ROWS BETWEEN 6 preceding AND CURRENT ROW 
+		) AS rolling_avg_7d
+	FROM Customer
+	GROUP BY visited_on
 )
-select
+SELECT
     visited_on,
-    sum(daily_amount) over (
-        order by visited_on
-        rows between 6 preceding and current row
-    ) as amount,
-    round(avg(daily_amount) over (
-        order by visited_on
-        rows between 6 preceding and current row
-
-    ), 2) as average_amount
-from cte
-offset 6
+    rolling_sum_7d AS amount,
+    ROUND(rolling_avg_7d, 2) AS average_amount
+FROM cte
+OFFSET 6
