@@ -1,18 +1,17 @@
-WITH grouped_seats AS (
-    SELECT
-        seat_id,
-        seat_id - ROW_NUMBER() OVER (ORDER BY seat_id) AS grp
-    FROM Cinema
-    WHERE free = 1
+with grps as (
+    select
+        *,
+        seat_id - row_number() over(partition by free order by seat_id) as grp
+    from Cinema
+    where free = 1
 ),
-seat_counts AS (
-    SELECT
+seat_counts as (
+    select
         seat_id,
-        grp,
-        COUNT(seat_id) OVER (PARTITION BY grp) AS group_size
-    FROM grouped_seats
+        count(seat_id) over(partition by grp) as group_size
+    from grps
 )
-SELECT seat_id
-FROM seat_counts
-WHERE group_size >= 2
-ORDER BY seat_id;
+select seat_id
+from seat_counts
+where group_size >= 2
+order by seat_id
