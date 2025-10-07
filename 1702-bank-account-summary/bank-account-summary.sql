@@ -1,22 +1,22 @@
-with cte as (
-    select user_id, credit from Users
-    union all
-    select paid_by, -amount from Transactions
-    union all
-    select paid_to, amount from Transactions
+WITH cte AS (
+    SELECT user_id, credit FROM Users
+    UNION ALL
+    SELECT paid_by, -amount FROM Transactions
+    UNION ALL
+    SELECT paid_to, amount FROM Transactions
 )
-select
-    c.user_id,
+SELECT
+    u.user_id,
     u.user_name,
-    sum(c.credit) as credit,
+    SUM(c.credit) AS credit,
     CASE
-        WHEN SUM(c.credit) < 0 then 'Yes'
-        else 'No'
+        WHEN SUM(c.credit) < 0 THEN 'Yes'
+        ELSE 'No'
     END AS credit_limit_breached
-from
-    cte c
-    join Users u on c.user_id = u.user_id
-group by
-    c.user_id,
+FROM
+    Users u
+    JOIN cte c ON u.user_id = c.user_id
+GROUP BY
+    u.user_id,
     u.user_name
-order by user_id
+ORDER BY u.user_id
