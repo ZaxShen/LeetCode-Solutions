@@ -5,4 +5,3 @@ select
     sum(duration) as total_duration
 from Calls
 group by person1, person2
-order by person1, person2
