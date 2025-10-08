@@ -1,24 +1,24 @@
-with cte as (
-    select
+WITH cte AS (
+    SELECT
         o.customer_id,
-        -- date_trunc('month', o.order_date) as year_month,
-        sum(p.price * o.quantity) as amount
-    from
+        -- DATE_TRUNC('month', o.order_date) AS year_month,
+        SUM(p.price * o.quantity) AS amount
+    FROM
         Orders o
-        join Product p on o.product_id = p.product_id
-    where o.order_date between '2020-06-01'::DATE and '2020-07-31'::DATE
-    group by 
-        customer_id, 
-        date_trunc('month', o.order_date)
+        JOIN Product p ON o.product_id = p.product_id
+    WHERE o.order_date BETWEEN '2020-06-01'::DATE AND '2020-07-31'::DATE
+    GROUP BY
+        customer_id,
+        DATE_TRUNC('month', o.order_date)
 )
-select
+SELECT
     cte.customer_id,
     c.name
-from 
+FROM
     cte
-    join customers c on cte.customer_id = c.customer_id
-where cte.amount >= 100
-group by
+    JOIN customers c ON cte.customer_id = c.customer_id
+WHERE cte.amount >= 100
+GROUP BY
     cte.customer_id,
     c.name
-having count(*) >= 2
+HAVING COUNT(*) >= 2
