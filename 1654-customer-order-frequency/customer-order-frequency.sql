@@ -21,4 +21,4 @@ WHERE cte.amount >= 100
 GROUP BY
     cte.customer_id,
     c.name
-HAVING COUNT(*) >= 2
+HAVING COUNT(*) = 2
