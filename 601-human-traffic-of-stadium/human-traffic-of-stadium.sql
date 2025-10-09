@@ -1,20 +1,20 @@
-with grps as (
+with cte1 as (
     select
         *,
-        id - row_number() over(order by visit_date) as grp
+        id - row_number() over(order by id) as grp
     from Stadium
     where people >= 100
 ),
-date_count as (
+cte2 as (
     select
         *,
-        count(id) over(partition by grp) as grp_size
-    from grps
+        count(*) over(partition by grp) as grp_size
+    from cte1
 )
 select
     id,
     visit_date,
     people
-from date_count
+from cte2
 where grp_size >= 3
 order by visit_date
