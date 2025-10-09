@@ -1,11 +1,6 @@
-with cte(sale_date, amount) as (
-    select sale_date, sold_num from Sales where fruit = 'apples'
-    union all
-    select sale_date, -sold_num from Sales where fruit = 'oranges'
-)
-select
+SELECT
     sale_date,
-    sum(amount) as diff
-from cte
-group by sale_date
-order by sale_date
+    MAX(CASE WHEN fruit = 'apples' THEN sold_num ELSE 0 END) - MAX(CASE WHEN fruit = 'oranges' THEN sold_num ELSE 0 END) AS diff
+FROM Sales
+GROUP BY sale_date
+ORDER BY sale_date
