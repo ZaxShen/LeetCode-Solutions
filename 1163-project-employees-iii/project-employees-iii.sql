@@ -1,17 +1,12 @@
-WITH cte AS (
-    SELECT
-        project_id,
+with cte as (
+    select
+        p.project_id,
         p.employee_id,
-        DENSE_RANK() OVER (PARTITION BY p.project_id ORDER BY e.experience_years DESC) AS exp_desc
-    FROM
+        dense_rank() over(partition by p.project_id order by e.experience_years desc) as exp_desc
+    from 
         Project p
-        JOIN Employee e USING (employee_id)
+        join Employee e on p.employee_id = e.employee_id
 )
-SELECT
-    project_id,
-    employee_id
-FROM cte
-WHERE exp_desc = 1
-ORDER BY
-    project_id ASC,
-    employee_id ASC
+select project_id, employee_id
+from cte
+where exp_desc = 1
