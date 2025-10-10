@@ -1,13 +1,14 @@
-with cte as (
-    select
+WITH day1 AS (
+    SELECT
         player_id,
-        min(event_date) as first_login
-    from Activity
-    group by player_id
+        MIN(event_date) AS day1,
+        MIN(event_date) + 1 AS day2
+    FROM Activity
+    GROUP BY player_id
 )
-select round(count(*)::NUMERIC / (select count(*) from cte), 2) as fraction
-from
-    cte c
-    join Activity a on c.player_id = a.player_id
-        and c.first_login + interval '1 day' = a.event_date
-    
+SELECT
+    ROUND(COUNT(a.player_id)::NUMERIC / COUNT(d.player_id), 2) AS fraction
+FROM
+    day1 d
+    LEFT JOIN Activity a ON d.player_id = a.player_id
+    AND d.day2 = a.event_date
