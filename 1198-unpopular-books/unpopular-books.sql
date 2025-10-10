@@ -1,12 +1,11 @@
-SELECT 
+select
     b.book_id,
     b.name
-FROM Books b
-LEFT JOIN Orders o 
-    ON b.book_id = o.book_id 
-    AND o.dispatch_date <= '2019-06-23'
-    AND o.dispatch_date >= '2019-06-23'::DATE - INTERVAL '1 year'
-WHERE b.available_from < '2019-06-23'::DATE - INTERVAL '1 month'
-GROUP BY b.book_id, b.name
-HAVING COALESCE(SUM(o.quantity), 0) < 10
-ORDER BY b.book_id
+from
+    Books b
+    left join Orders o on b.book_id = o.book_id
+    and o.dispatch_date between '2018-06-23'::DATE and '2019-06-23'::DATE
+where
+    b.available_from + interval '1 month' < '2019-06-23'::DATE
+group by b.book_id, b.name
+    having coalesce(sum(o.quantity), 0) < 10
