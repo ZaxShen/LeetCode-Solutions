@@ -1,12 +1,18 @@
+with unbanned_clients as (
+    select users_id
+    from Users
+    where banned = 'No' and role = 'client'
+),
+unbanned_drivers as (
+    select users_id
+    from Users
+    where banned = 'No' and role = 'driver' 
+)
 select
-    t.request_at as Day,
-    round(count(*) FILTER (where t.status ~ '^cancelled')::NUMERIC / count(*), 2) as "Cancellation Rate"
+    request_at as Day,
+    round(count(*) filter(where status ~ '^cancelled')::NUMERIC / count(*), 2) as "Cancellation Rate"
 from Trips t
-    join Users c on t.client_id = c.users_id
-        and c.banned = 'No'
-        and c.role = 'client'
-    join Users d on t.driver_id = d.users_id
-        and d.banned = 'No'
-        and d.role = 'driver'
-where t.request_at between '2013-10-01' and '2013-10-03'
-group by t.request_at
+where request_at::DATE between '2013-10-01'::DATE and '2013-10-03'::DATE
+    and exists (select 1 from unbanned_clients uc where t.client_id = uc.users_id)
+    and exists (select 1 from unbanned_drivers ud where t.driver_id = ud.users_id)
+group by request_at
