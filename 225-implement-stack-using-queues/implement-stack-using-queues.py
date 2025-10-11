@@ -7,6 +7,7 @@ class MyStack:
 
     def push(self, x: int) -> None:
         q = self.q
+
         q.append(x)
         for _ in range(len(q) - 1):
             q.append(q.popleft())
@@ -16,11 +17,9 @@ class MyStack:
 
     def top(self) -> int:
         return self.q[0]
-        
 
     def empty(self) -> bool:
         return not self.q
-        
 
 
 # Your MyStack object will be instantiated and called as such:
