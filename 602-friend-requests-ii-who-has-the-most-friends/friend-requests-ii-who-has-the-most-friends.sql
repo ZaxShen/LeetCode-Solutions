@@ -1,13 +1,9 @@
-with cte(id) as (
-    select 
-        requester_id as id
-    from RequestAccepted
-    union all
-    select
-        accepter_id
-    from RequestAccepted
+with cte(id, friend_id) as (
+    select requester_id, accepter_id from RequestAccepted
+    union
+    select accepter_id, requester_id from RequestAccepted
 )
-select id, count(id) as num
+select id, count(friend_id) as num
 from cte
 group by id
 order by num desc
