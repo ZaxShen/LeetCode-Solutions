@@ -1,9 +1,10 @@
-with cte as (
-    select
-        *,
-        dense_rank() over(partition by customer_id order by order_date) as order_rnk
-    from Delivery
-)
-select round(avg((order_date = customer_pref_delivery_date)::INT) * 100, 2) as immediate_percentage
-from cte
-where order_rnk = 1
+SELECT 
+    ROUND(AVG((order_date = customer_pref_delivery_date)::INT) * 100, 2) AS immediate_percentage
+FROM (
+    SELECT DISTINCT ON (customer_id)
+        customer_id,
+        order_date,
+        customer_pref_delivery_date
+    FROM Delivery
+    ORDER BY customer_id, order_date
+) first_orders;
