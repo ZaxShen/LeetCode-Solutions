@@ -1,6 +1,6 @@
-SELECT
+select
     sale_date,
-    MAX(CASE WHEN fruit = 'apples' THEN sold_num ELSE 0 END) - MAX(CASE WHEN fruit = 'oranges' THEN sold_num ELSE 0 END) AS diff
-FROM Sales
-GROUP BY sale_date
-ORDER BY sale_date
+    sum(case when fruit = 'apples' then sold_num else 0 end) - sum(case when fruit = 'oranges' then sold_num else 0 end) as diff
+from Sales
+group by sale_date
+order by sale_date
