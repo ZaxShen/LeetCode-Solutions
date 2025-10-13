@@ -1,7 +1,7 @@
 with cte as (
     select
         *,
-        dense_rank() over(partition by student_id order by grade desc, course_id asc) as grade_desc
+        dense_rank() over(partition by student_id order by grade desc, course_id) as grade_desc
     from Enrollments
 )
 select
