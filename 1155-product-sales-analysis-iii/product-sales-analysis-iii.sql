@@ -1,14 +1,16 @@
-SELECT
-    product_id,
-    YEAR AS first_year,
-    quantity,
-    price
-FROM Sales
-WHERE
-    (product_id, YEAR) IN (
-        SELECT
-            product_id,
-            MIN(YEAR) AS first_year
-        FROM Sales
-        GROUP BY product_id
-    )
+with cte as (
+    select
+        *,
+        row_number() over(partition by product_id order by year) as rn
+    from Sales
+)
+select
+    s.product_id,
+    s.year as first_year,
+    s.quantity,
+    s.price
+from 
+    Sales s
+    join cte c on s.product_id = c.product_id
+    and s.year = c.year
+where rn = 1
