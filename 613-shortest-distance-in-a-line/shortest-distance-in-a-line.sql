@@ -1,5 +1,5 @@
-SELECT
-    MIN(ABS(p1.x - p2.x)) AS shortest
-FROM
+select
+    min(abs(p1.x - p2.x)) as shortest
+from
     Point p1
-    JOIN Point p2 ON p1.x < p2.x;
+    join Point p2 on p1.x < p2.x
