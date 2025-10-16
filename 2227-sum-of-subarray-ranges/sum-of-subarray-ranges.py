@@ -1,11 +1,10 @@
 class Solution:
-    # O(n), O(n)
     def subArrayRanges(self, nums: List[int]) -> int:
         min_stack = []
         max_stack = []
         mins = [0] * len(nums)
         maxs = [0] * len(nums)
-        
+
         for i, v in enumerate(nums):
             while min_stack and nums[min_stack[-1]] > v:
                 min_stack.pop()
