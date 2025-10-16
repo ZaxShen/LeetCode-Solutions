@@ -1,13 +1,13 @@
 class Solution:
+    # O(n), O(n)
     def simplifyPath(self, path: str) -> str:
-        stack = []
         path = path.split('/')
+        stack = []
 
         for p in path:
-            if p not in ('', '..', '.'):
+            if p not in ('..', '', '.'):
                 stack.append(p)
-            elif stack:
-                if p == '..':
-                    stack.pop()
-        
+            elif stack and p == '..':
+                stack.pop()
+
         return '/' + '/'.join(stack)
