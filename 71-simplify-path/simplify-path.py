@@ -4,10 +4,10 @@ class Solution:
         path = path.split('/')
 
         for p in path:
-            if p not in ('..', '', '.'):
+            if p not in ('', '..', '.'):
                 stack.append(p)
-            if stack:
+            elif stack:
                 if p == '..':
                     stack.pop()
-
+        
         return '/' + '/'.join(stack)
