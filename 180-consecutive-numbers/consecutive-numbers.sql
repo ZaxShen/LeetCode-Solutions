@@ -1,10 +1,10 @@
-with cte as (
-
-select
-    num,
-    lead(num, 1) over(order by id) as lag_1,
-    lead(num, 2) over(order by id) as lag_2
-from logs
+WITH cte AS (
+    SELECT
+        num,
+        LAG(num, 1) OVER (ORDER BY 1) AS lag_1,
+        LAG(num, 2) OVER (ORDER BY 1) AS lag_2
+    FROM
+        logs
 )
 SELECT DISTINCT num AS ConsecutiveNums
 FROM cte
