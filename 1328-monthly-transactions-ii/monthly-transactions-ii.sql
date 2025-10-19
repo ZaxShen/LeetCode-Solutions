@@ -1,30 +1,27 @@
-with all_transactions as (
-    select
-        to_char(trans_date, 'YYYY-MM') as month,
-        country,
-        'approved' as "state",
-        amount
-    from Transactions t
-    where "state" = 'approved'
-
+with cte as (
+    select 
+        TO_CHAR(trans_date, 'YYYY-MM') as month, 
+        country, 
+        amount, 
+        state
+    from Transactions
+    where state = 'approved'
     union all
-
-    select
-        to_char(c.trans_date, 'YYYY-MM') as month,
-        t.country,
-        'chargeback' as "state",
-        t.amount
+    select 
+        TO_CHAR(c.trans_date, 'YYYY-MM') as month, 
+        t.country, 
+        t.amount, 
+        'chargeback' as state
     from Chargebacks c
-        join Transactions t on c.trans_id = t.id
+    join Transactions t on c.trans_id = t.id
 )
--- select * from all_transactions
 select
     month,
     country,
-    sum(case when "state" = 'approved' then 1 else 0 end) as approved_count,
-    sum(case when "state" = 'approved' then amount else 0 end) as approved_amount,
-    sum(case when "state" = 'chargeback' then 1 else 0 end) as chargeback_count,
-    sum(case when "state" = 'chargeback' then amount else 0 end) as chargeback_amount
-from all_transactions
+    sum((state = 'approved')::INT) as approved_count,
+    sum(case when state = 'approved' then amount else 0 end) as approved_amount,
+    sum((state = 'chargeback')::INT) as chargeback_count,
+    sum(case when state = 'chargeback' then amount else 0 end) as chargeback_amount
+from cte
 group by month, country
 order by month, country
