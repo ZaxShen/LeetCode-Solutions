@@ -1,7 +1,6 @@
 class Solution:
+    # O(n), O(1)
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        # Collision: -> <-
-        # No Collision: <- ->, <- <-, -> ->
         stack = []
         for i in asteroids:
             if i > 0:
@@ -11,9 +10,8 @@ class Solution:
                     stack.pop()
                 if stack and stack[-1] == abs(i):
                     stack.pop()
-                # elif stack and stack[-1] > abs(i):
-                #     continue
                 elif not stack or stack[-1] < 0:
                     stack.append(i)
 
         return stack
+            
