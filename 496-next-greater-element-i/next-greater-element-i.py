@@ -1,17 +1,19 @@
 class Solution:
+    # O(n), O(n)
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         hashmap = {}
-        ds = []
+        desc_stack = []
+
+        for i in nums2:
+            while desc_stack and desc_stack[-1] < i:
+                prev_greatest = desc_stack.pop()
+                hashmap[prev_greatest] = i
+            desc_stack.append(i)
+
         res = [-1] * len(nums1)
 
-        for v in nums2:
-            while ds and ds[-1] < v:
-                last_greatest = ds.pop()
-                hashmap[last_greatest] = v
-            ds.append(v)
-
-        for i, v in enumerate(nums1):
-            if v in hashmap:
-                res[i] = hashmap[v]
-
+        for idx, i in enumerate(nums1):
+            if i in hashmap:
+                res[idx] = hashmap[i]
+        
         return res
