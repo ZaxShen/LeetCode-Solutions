@@ -1,13 +1,11 @@
 class Solution:
     def finalPrices(self, prices: List[int]) -> List[int]:
-        non_desc_stack = []
+        stack_x_desc = []
 
         for idx, i in enumerate(prices):
-            while non_desc_stack and prices[non_desc_stack[-1]] >= i:
-                _ = non_desc_stack.pop()
-                discount_price = prices[_] - i
-                prices[_] = discount_price
-            non_desc_stack.append(idx)
+            while stack_x_desc and prices[stack_x_desc[-1]] >= i:
+                prices[stack_x_desc.pop()] -= i
+            stack_x_desc.append(idx)
 
         return prices
             
