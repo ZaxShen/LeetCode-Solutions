@@ -1,17 +1,19 @@
-with events(event_date, state) as (
-    select fail_date, 'failed' from Failed
+with events(event_date, event_state) as (
+    select fail_date, 'failed'
+    from Failed
     union
-    select success_date, 'succeeded' from Succeeded
+    select success_date, 'succeeded'
+    from Succeeded
 ), grps as (
     select
-        state,
+        event_state,
         event_date,
-        event_date - interval '1 day' * row_number() over(partition by state order by event_date) as grp
+        event_date - interval '1 day' * row_number() over (partition by event_state order by event_date) as grp
     from events
-    where event_date between '2019-01-01'::Date and '2019-12-31'::date
+    where event_date between '2019-01-01'::DATE and '2019-12-31'::DATE
 )
 select
-    state as period_state,
+    event_state as period_state,
     min(event_date) as start_date,
     max(event_date) as end_date
 from grps
