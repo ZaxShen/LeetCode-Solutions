@@ -1,8 +1,8 @@
-with cte as (
-    select num
-    from MyNumbers
-    group by num
-        having count(num) = 1
-)
-select max(num) as num
-from cte
+WITH cte AS (
+	SELECT num
+	FROM MyNumbers
+	GROUP BY num
+	HAVING COUNT(num) = 1
+    )
+SELECT MAX(num) AS num
+FROM cte
