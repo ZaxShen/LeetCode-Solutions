@@ -1,4 +1,4 @@
-select count(distinct account_id) as accounts_count
+select count(account_id) as accounts_count
 from Subscriptions su
 where start_date < '2022-01-01'::DATE and end_date >= '2021-01-01'::DATE
     and not exists (
