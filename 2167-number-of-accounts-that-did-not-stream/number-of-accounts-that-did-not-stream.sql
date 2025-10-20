@@ -1,11 +1,9 @@
-select
-    count(*) as accounts_count
+select count(distinct account_id) as accounts_count
 from Subscriptions su
-where start_date < '2022-01-01'
-    and end_date >= '2021-01-01'
+where start_date < '2022-01-01'::DATE and end_date >= '2021-01-01'::DATE
     and not exists (
-        select account_id
+        select 1
         from Streams st
-        where extract(year from stream_date) = 2021
-            and su.account_id = st.account_id
+        where su.account_id = st.account_id
+            and extract(year from st.stream_date) = 2021
     )
