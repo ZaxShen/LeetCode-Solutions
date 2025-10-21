@@ -1,10 +1,12 @@
+from collections import Counter
+
 class Solution:
     def countElements(self, arr: List[int]) -> int:
-        hashset = set(arr)
+        count = Counter(arr)
         res = 0
 
-        for num in arr:
-            if num + 1 in hashset:
+        for i in arr:
+            if i + 1 in count:
                 res += 1
-
+        
         return res
