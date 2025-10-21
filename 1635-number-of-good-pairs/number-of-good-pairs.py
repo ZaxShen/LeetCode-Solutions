@@ -1,12 +1,10 @@
-from collections import Counter
-
 class Solution:
     def numIdenticalPairs(self, nums: List[int]) -> int:
-        count = Counter(nums)
+        d = {}
         res = 0
 
         for i in nums:
-            count[i] -= 1
-            res += count[i]
+            res += d.get(i, 0)
+            d[i] = d.get(i, 0) + 1
 
         return res
