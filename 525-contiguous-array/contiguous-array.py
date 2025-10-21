@@ -11,8 +11,7 @@ class Solution:
             
             if prefix in seen:
                 res = max(res, idx - seen[prefix])
-
-            if prefix not in seen:
+            else:
                 seen[prefix] = idx
 
         return res
