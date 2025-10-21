@@ -5,9 +5,8 @@ class Solution:
         count = Counter(nums)
         res = 0
 
-        for num in nums:
-            if num in count:
-                res += count[num] - 1
-                count[num] -= 1
+        for i in nums:
+            count[i] -= 1
+            res += count[i]
 
         return res
