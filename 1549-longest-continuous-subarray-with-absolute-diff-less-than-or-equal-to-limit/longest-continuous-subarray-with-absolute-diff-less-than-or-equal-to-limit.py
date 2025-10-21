@@ -6,27 +6,22 @@ class Solution:
         dq = deque()
         res = left = 0
 
-        for right, num in enumerate(nums):
-            while aq and aq[-1] > num:
+        for right, i in enumerate(nums):
+            while aq and aq[-1] > i:
                 aq.pop()
-            aq.append(num)
-
-            while dq and dq[-1] < num:
+            aq.append(i)
+            
+            while dq and dq[-1] < i:
                 dq.pop()
-            dq.append(num)
+            dq.append(i)
 
-            # 4
-            # 2
-
-            # 8, 4
-            # 2, 4
             while dq[0] - aq[0] > limit:
                 if dq[0] == nums[left]:
                     dq.popleft()
                 if aq[0] == nums[left]:
                     aq.popleft()
                 left += 1
-
+            
             res = max(res, right - left + 1)
 
         return res
