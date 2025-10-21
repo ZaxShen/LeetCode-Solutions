@@ -1,15 +1,15 @@
 class Solution:
     def maximumUniqueSubarray(self, nums: List[int]) -> int:
-        hashset = set()
-        prefix = res = left = 0
+        seen = set()
+        left = win_sum = res = 0
 
-        for right, i in enumerate(nums):
-            prefix += i
-            while i in hashset:
-                prefix -= nums[left]
-                hashset.remove(nums[left])
+        for i in nums:
+            win_sum += i
+            while i in seen:
+                seen.remove(nums[left])
+                win_sum -= nums[left]
                 left += 1
-            hashset.add(i)
-            res = max(res, prefix)
-
+            seen.add(i)
+            res = max(res, win_sum)
+        
         return res
