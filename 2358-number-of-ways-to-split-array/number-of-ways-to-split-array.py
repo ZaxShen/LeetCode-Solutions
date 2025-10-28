@@ -2,17 +2,12 @@ from itertools import accumulate
 
 class Solution:
     def waysToSplitArray(self, nums: List[int]) -> int:
-        if len(nums) < 2:
-            return 0
-
-        total = sum(nums)
         acc = tuple(accumulate(nums))
+        total = acc[-1]
 
         res = 0
-        for i in range(len(nums) - 1):
-            left_sec = acc[i]
-            right_sec = total - left_sec
-            if left_sec >= right_sec:
+        for idx, i in enumerate(nums[:-1]):
+            if acc[idx] >= total - acc[idx]:
                 res += 1
 
         return res
