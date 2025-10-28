@@ -1,13 +1,12 @@
-from itertools import accumulate
-
 class Solution:
+    # O(n), O(1)
     def waysToSplitArray(self, nums: List[int]) -> int:
-        acc = tuple(accumulate(nums))
-        total = acc[-1]
+        total = sum(nums)
+        left_sec = res = 0
 
-        res = 0
-        for idx, i in enumerate(nums[:-1]):
-            if acc[idx] >= total - acc[idx]:
-                res += 1
+        for i in nums[:-1]:
+            left_sec += i
+            right_sec = total - left_sec
+            if left_sec >= right_sec: res += 1
 
         return res
