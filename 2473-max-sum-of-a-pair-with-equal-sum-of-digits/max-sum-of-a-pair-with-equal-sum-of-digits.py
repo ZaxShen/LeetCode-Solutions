@@ -1,15 +1,19 @@
 from collections import defaultdict
 
 class Solution:
+    # O(n), O(k)
     def maximumSum(self, nums: List[int]) -> int:
-        seen = defaultdict(int)
+        d = defaultdict(int)
         res = -1
 
-        for num in nums:
-            digit_sum = sum(map(int, str(num)))
-            if digit_sum in seen:
-                res = max(res, seen[digit_sum] + num)
+        for i in nums:
+            k = sum(map(int, str(i)))
+
+            if k in d:
+                res = max(res, d[k] + i)
             
-            seen[digit_sum] = max(num, seen[digit_sum])
+            d[k] = max(d[k], i)
 
         return res
+
+
