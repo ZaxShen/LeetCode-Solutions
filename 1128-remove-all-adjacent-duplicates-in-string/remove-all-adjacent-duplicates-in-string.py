@@ -1,12 +1,11 @@
 class Solution:
-    # O(n), O(n)
     def removeDuplicates(self, s: str) -> str:
         stack = []
 
-        for char in s:
-            if stack and stack[-1] == char:
+        for i in s:
+            if stack and stack[-1] == i:
                 stack.pop()
             else:
-                stack.append(char)
+                stack.append(i)
 
         return ''.join(stack)
