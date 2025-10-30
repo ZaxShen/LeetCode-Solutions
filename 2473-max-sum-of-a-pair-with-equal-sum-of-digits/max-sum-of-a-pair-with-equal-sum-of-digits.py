@@ -9,6 +9,8 @@ class Solution:
             k = sum(map(int, str(i)))
             if k in d:
                 res = max(res, i + d[k])
-            d[k] = max(d[k], i)
+                d[k] = max(d[k], i)
+            else:
+                d[k] = i
 
         return res
