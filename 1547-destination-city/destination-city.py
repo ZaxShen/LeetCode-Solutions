@@ -1,14 +1,7 @@
-from collections import Counter
-
 class Solution:
     def destCity(self, paths: List[List[str]]) -> str:
-        count = Counter()
+        starts = {start for start, _ in paths}
 
-        for start, end in paths:
-            count[start] += 1
-            count[end] += 1
-
-        
-        for start, end in paths:
-            if count[end] == 1:
+        for _, end in paths:
+            if end not in starts:
                 return end
