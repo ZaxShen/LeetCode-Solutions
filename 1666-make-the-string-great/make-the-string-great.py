@@ -2,10 +2,10 @@ class Solution:
     def makeGood(self, s: str) -> str:
         stack = []
 
-        for char in s:
-            if stack and stack[-1] != char and stack[-1].lower() == char.lower():
+        for i in s:
+            if stack and abs(ord(stack[-1]) - ord(i)) == 32:
                 stack.pop()
             else:
-                stack.append(char)
+                stack.append(i)
 
         return ''.join(stack)
