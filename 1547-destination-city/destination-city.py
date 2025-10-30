@@ -1,8 +1,14 @@
-class Solution:
-    # O(n)
-    def destCity(self, paths: List[List[str]]) -> str:
-        starts = {start for start, _ in paths}
+from collections import Counter
 
-        for _, destination in paths:
-            if destination not in starts:
-                return destination
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        count = Counter()
+
+        for start, end in paths:
+            count[start] += 1
+            count[end] += 1
+
+        
+        for start, end in paths:
+            if count[end] == 1:
+                return end
