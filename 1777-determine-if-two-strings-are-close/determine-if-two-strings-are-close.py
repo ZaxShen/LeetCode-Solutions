@@ -2,12 +2,7 @@ from collections import Counter
 
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
-        if len(word1) != len(word2):
-            return False
+        if len(word1) != len(word2): return False
+        count1, count2 = Counter(word1), Counter(word2)
 
-        c1, c2 = Counter(word1), Counter(word2)
-
-        if c1.keys() != c2.keys():
-            return False
-
-        return sorted(c1.values()) == sorted(c2.values())
+        return count1.keys() == count2.keys() and sorted(count1.values()) == sorted(count2.values())
