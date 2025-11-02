@@ -9,7 +9,7 @@ class MyQueue:
 
     def pop(self) -> int:
         self.peek()
-        
+
         return self.destack.pop()
 
     def peek(self) -> int:
