@@ -2,7 +2,7 @@ class Solution:
     # O(n), O(1)
     def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
         # Edge Case
-        if k == 0: return 0
+        if k <= 1: return 0
 
         left = res = 0
         win_prod = 1
