@@ -1,6 +1,6 @@
 class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
-        # Edge Case
+        # Edge Case: If k >= length, remove all digits
         if k >= len(num): return '0'
 
         mono_stack = []
@@ -11,7 +11,9 @@ class Solution:
                 k -= 1
             mono_stack.append(i)
 
-        # Edge Case
-        if k: mono_stack = mono_stack[:-k]
+        # Edge Case: Remove remaining k digits from end
+        if k > 0: mono_stack = mono_stack[:-k]
 
-        return ''.join(mono_stack).lstrip('0') or '0'
+        # Edge Case: Empty string
+        res = ''.join(mono_stack).lstrip('0')
+        return res or '0'
