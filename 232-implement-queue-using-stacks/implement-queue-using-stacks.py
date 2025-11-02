@@ -3,19 +3,18 @@ class MyQueue:
     def __init__(self):
         self.enstack = []
         self.destack = []
-        # 1, 2, 3
 
     def push(self, x: int) -> None:
         self.enstack.append(x)
 
     def pop(self) -> int:
         self.peek()
-
+        
         return self.destack.pop()
 
     def peek(self) -> int:
         enstack, destack = self.enstack, self.destack
-        
+
         if not destack:
             while enstack:
                 destack.append(enstack.pop())
