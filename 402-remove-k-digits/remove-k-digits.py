@@ -14,6 +14,7 @@ class Solution:
         # Edge Case: Remove remaining k digits from end
         if k > 0: mono_stack = mono_stack[:-k]
 
-        # Edge Case: Empty string
-        res = ''.join(mono_stack).lstrip('0')
-        return res or '0'
+        # Edge Case: Handle leading zeros and empty result
+        res = ''.join(mono_stack).lstrip('0') or '0'
+        
+        return res
