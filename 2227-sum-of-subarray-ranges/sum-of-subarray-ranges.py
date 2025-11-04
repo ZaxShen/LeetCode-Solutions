@@ -1,27 +1,31 @@
 class Solution:
     def subArrayRanges(self, nums: List[int]) -> int:
-        min_stack = []
-        max_stack = []
+        asc_stack = []
+        desc_stack = []
         mins = [0] * len(nums)
         maxs = [0] * len(nums)
 
-        for i, v in enumerate(nums):
-            while min_stack and nums[min_stack[-1]] > v:
-                min_stack.pop()
-            if min_stack:
-                prev_min = mins[min_stack[-1]]
-                mins[i] = prev_min + v * (i - min_stack[-1])
-            else:
-                mins[i] = v * (i + 1)
-            min_stack.append(i)
+        # 1, 2, 3
+        # 1, 1, 1
+        # 1, 2, 3
 
-            while max_stack and nums[max_stack[-1]] < v:
-                max_stack.pop()
-            if max_stack:
-                prev_max = maxs[max_stack[-1]]
-                maxs[i] = prev_max + v * (i - max_stack[-1])
+        for idx, i in enumerate(nums):
+            while asc_stack and nums[asc_stack[-1]] > i:
+                asc_stack.pop()
+            if asc_stack:
+                prev_sum = mins[asc_stack[-1]]
+                mins[idx] = prev_sum + i * (idx - asc_stack[-1])
             else:
-                maxs[i] = v * (i + 1)
-            max_stack.append(i)
+                mins[idx] = i * (idx + 1)
+            asc_stack.append(idx)
+            
+            while desc_stack and nums[desc_stack[-1]] < i:
+                desc_stack.pop()
+            if desc_stack:
+                prev_sum = maxs[desc_stack[-1]]
+                maxs[idx] = prev_sum + i * (idx - desc_stack[-1])
+            else:
+                maxs[idx] = i * (idx + 1)
+            desc_stack.append(idx)
 
-        return sum(max_v - min_v for max_v, min_v in zip(maxs, mins))
+        return sum(max_i - min_i for max_i, min_i in zip(maxs, mins))
