@@ -1,10 +1,10 @@
 class Solution:
-    # O(n), O(k)
     def repeatedCharacter(self, s: str) -> str:
-        counter = {}
+        seen = set()
 
-        for char in s:
-            # Early termination
-            if char in counter:
-                return char
-            counter[char] = counter.get(char, 0) + 1
+        for i in s:
+            if i in seen:
+                return i
+            seen.add(i)
+
+        return False
