@@ -1,15 +1,16 @@
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
-        vowels = set("aeiou")
-        # Frist window
-        res = win_cnt = sum(map(lambda char: char in vowels, s[:k]))
+        vowels = set('aeiou')
+        res = 0
 
-        # Slide window
-        for i in range(k, len(s)):
-            win_cnt += (s[i] in vowels) - (s[i - k] in vowels)
-            res = max(res, win_cnt)
+        res = count = sum(i in vowels for i in s[:k])
 
+        left = 0
+        for right in range(k, len(s)):
+            count += (s[right] in vowels) - (s[left] in vowels)
+            res = max(res, count)
+            left += 1
             if res == k:
-                break
+                return res
 
         return res
