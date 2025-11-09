@@ -5,7 +5,7 @@ class Solution:
 
         for i in range(len(timeSeries) - 1):
             timeSpan = timeSeries[i + 1] - timeSeries[i]
-            res += timeSpan if timeSpan < duration else duration
+            res += min(timeSpan, duration)
+        res += duration
 
-        return res + duration
-            
+        return res
