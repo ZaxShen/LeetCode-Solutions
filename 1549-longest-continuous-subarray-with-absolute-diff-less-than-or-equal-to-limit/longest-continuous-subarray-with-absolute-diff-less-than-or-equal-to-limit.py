@@ -15,7 +15,7 @@ class Solution:
                 dq.pop()
             dq.append(i)
 
-            while dq and aq and dq[0] - aq[0] > limit:
+            while dq[0] - aq[0] > limit:
                 if nums[left] == dq[0]:
                     dq.popleft()
                 elif nums[left] == aq[0]:
