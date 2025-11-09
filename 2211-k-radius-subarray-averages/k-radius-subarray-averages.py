@@ -1,23 +1,18 @@
 class Solution:
     def getAverages(self, nums: List[int], k: int) -> List[int]:
-        if len(nums) < 2 * k + 1:
-            return [-1] * len(nums)
-
-        if k == 0:
-            return nums
+        if k == 0: return nums
 
         n = len(nums)
         res = [-1] * n
         win_size = 2 * k + 1
-        # Frist window
-        win_sum = sum(nums[:win_size])
-        win_avg = win_sum // win_size
-        res[k] = win_avg
 
-        # Slide window
-        for i in range(win_size, len(nums)):
+        if win_size > n: return res
+
+        win_sum = sum(nums[:win_size])
+        res[k] = win_sum // win_size
+        
+        for i in range(win_size, n):
             win_sum += nums[i] - nums[i - win_size]
-            win_avg = win_sum // win_size
-            res[i - k] = win_avg
+            res[i - k] = win_sum // win_size
 
         return res
