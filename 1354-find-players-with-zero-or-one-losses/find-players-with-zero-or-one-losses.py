@@ -10,9 +10,7 @@ class Solution:
 
         zero_loss, one_loss = [], []
         for k, v in loss_count.items():
-            if v == 0:
-                zero_loss.append(k)
-            elif v == 1:
-                one_loss.append(k)
+            if v == 0: zero_loss.append(k)
+            elif v == 1: one_loss.append(k)
 
         return sorted(zero_loss), sorted(one_loss)
