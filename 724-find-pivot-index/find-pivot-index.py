@@ -1,12 +1,12 @@
-from itertools import accumulate
-
 class Solution:
+    # O(n), O(1)
     def pivotIndex(self, nums: List[int]) -> int:
-        acc = tuple(accumulate(nums))
-        total = acc[-1]
+        total = sum(nums)
+        prefix = 0
 
         for idx, i in enumerate(nums):
-            if total - acc[idx] == acc[idx] - i:
+            if prefix == total - prefix - i:
                 return idx
+            prefix += i
 
         return -1
