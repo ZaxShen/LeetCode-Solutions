@@ -4,10 +4,10 @@ class NumArray:
 
     def __init__(self, nums: List[int]):
         self.nums = nums
-        self.acc = tuple(accumulate(nums))
+        self.prefix = tuple(accumulate(nums))
 
     def sumRange(self, left: int, right: int) -> int:
-        return self.acc[right] - self.acc[left] + self.nums[left]
+        return self.prefix[right] - self.prefix[left] + self.nums[left]
 
 
 # Your NumArray object will be instantiated and called as such:
