@@ -1,19 +1,18 @@
-from collections import Counter
-
 class Solution:
-    # O(n), O(1)
     def customSortString(self, order: str, s: str) -> str:
-        count = Counter(s)
-        res = []
-
-        for i in order:
-            if i in count:
-                res.append(i * count[i])
-                del count[i]
-
-        for k, v in count.items():
-            res.append(k * v)
-
-        return ''.join(res)
-
-        
+        hashmap = {}
+        res = ""
+        for c in s:
+            if c in hashmap:
+                hashmap[c] += 1
+            else:
+                hashmap[c] = 1
+        #Add the character if it's present in hashmap to res
+        for char in order:
+            if char in hashmap:
+                res += char * hashmap[char]
+                del hashmap[char]
+        #Add the remaining characters
+        for char, count in hashmap.items():
+            res += char * count
+        return res
