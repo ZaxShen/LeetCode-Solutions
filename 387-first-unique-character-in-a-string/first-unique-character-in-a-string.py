@@ -5,8 +5,8 @@ class Solution:
     def firstUniqChar(self, s: str) -> int:
         count = Counter(s)
 
-        for idx, i in enumerate(s):
+        for i in s:
             if count[i] == 1:
-                return idx
+                return s.index(i)
 
         return -1
