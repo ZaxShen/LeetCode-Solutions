@@ -7,7 +7,6 @@ class Solution:
             while mono_stack and mono_stack[-1] > i:
                 mono_stack.pop()
             mono_stack.append(i)
-
             res += len(mono_stack)
 
         return res
