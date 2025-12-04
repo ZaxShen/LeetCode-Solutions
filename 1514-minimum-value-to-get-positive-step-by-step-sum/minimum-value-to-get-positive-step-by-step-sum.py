@@ -1,9 +1,9 @@
 class Solution:
     def minStartValue(self, nums: List[int]) -> int:
-        prefix = min_val = 0
+        curr = min_start_val = 0
 
-        for num in nums:
-            prefix += num
-            min_val = min(min_val, prefix)
+        for i in nums:
+            curr += i
+            min_start_val = min(curr, min_start_val)
 
-        return -min_val + 1
+        return -min_start_val + 1
