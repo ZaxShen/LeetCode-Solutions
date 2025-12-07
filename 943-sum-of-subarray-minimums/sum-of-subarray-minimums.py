@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(n)
     def sumSubarrayMins(self, arr: List[int]) -> int:
         MOD = 10 ** 9 + 7
 
@@ -11,12 +12,14 @@ class Solution:
                 mono_stack.pop()
             
             if mono_stack:
+                # prev_min = mins[idx - 1] ❌
                 prev_min = mins[mono_stack[-1]]
+                # curr_min = prev_min + i ❌
                 curr_min = prev_min + i * (idx - mono_stack[-1])
             else:
                 curr_min = i * (idx + 1)
             mins[idx] = curr_min
-            
+
             res += curr_min
             mono_stack.append(idx)
 
