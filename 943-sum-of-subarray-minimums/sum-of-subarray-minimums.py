@@ -11,12 +11,13 @@ class Solution:
                 mono_stack.pop()
             
             if mono_stack:
-                prev_sum = mins[mono_stack[-1]]
-                mins[idx] = prev_sum + i * (idx - mono_stack[-1])
+                prev_min = mins[mono_stack[-1]]
+                curr_min = prev_min + i * (idx - mono_stack[-1])
             else:
-                mins[idx] = i * (idx + 1)
+                curr_min = i * (idx + 1)
+            mins[idx] = curr_min
             
-            res += mins[idx]
+            res += curr_min
             mono_stack.append(idx)
 
         return res % MOD
