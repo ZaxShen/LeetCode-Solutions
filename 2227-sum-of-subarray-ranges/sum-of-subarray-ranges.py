@@ -5,27 +5,27 @@ class Solution:
         mins = [0] * len(nums)
         maxs = [0] * len(nums)
 
-        # 1, 2, 3
-        # 1, 1, 1
-        # 1, 2, 3
-
         for idx, i in enumerate(nums):
             while asc_stack and nums[asc_stack[-1]] > i:
                 asc_stack.pop()
+            
             if asc_stack:
                 prev_sum = mins[asc_stack[-1]]
                 mins[idx] = prev_sum + i * (idx - asc_stack[-1])
             else:
                 mins[idx] = i * (idx + 1)
+
             asc_stack.append(idx)
-            
+
             while desc_stack and nums[desc_stack[-1]] < i:
                 desc_stack.pop()
+
             if desc_stack:
                 prev_sum = maxs[desc_stack[-1]]
                 maxs[idx] = prev_sum + i * (idx - desc_stack[-1])
             else:
                 maxs[idx] = i * (idx + 1)
+
             desc_stack.append(idx)
 
-        return sum(max_i - min_i for max_i, min_i in zip(maxs, mins))
+        return sum(i - j for i, j in zip(maxs, mins))
