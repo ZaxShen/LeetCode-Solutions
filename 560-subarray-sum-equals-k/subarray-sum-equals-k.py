@@ -10,7 +10,12 @@ class Solution:
             prefix += i
             target = prefix - k
 
-            res += seen[target]
-            seen[prefix] += 1
+            if target in seen:
+                res += seen[target]
+
+            if prefix in seen:
+                seen[prefix] += 1
+            else:
+                seen[prefix] = 1
 
         return res
