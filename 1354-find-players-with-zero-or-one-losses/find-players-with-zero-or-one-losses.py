@@ -2,15 +2,13 @@ from collections import Counter
 
 class Solution:
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
-        loss_count = Counter()
+        winners = Counter()
+        losers = Counter()
 
         for winner, loser in matches:
-            loss_count[winner] += 0
-            loss_count[loser] += 1
+            winners[winner] += 1
+            losers[loser] += 1
 
-        zero_loss, one_loss = [], []
-        for k, v in loss_count.items():
-            if v == 0: zero_loss.append(k)
-            elif v == 1: one_loss.append(k)
-
-        return sorted(zero_loss), sorted(one_loss)
+        zero_lose = winners.keys() - losers.keys()
+        one_lose = [loser for loser, matches in losers.items() if matches == 1]
+        return sorted(zero_lose), sorted(one_lose)
