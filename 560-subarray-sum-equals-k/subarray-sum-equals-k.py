@@ -1,14 +1,17 @@
+from collections import defaultdict
+
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        seen = {0: 1}
-        prefix = count = 0
+        seen = defaultdict(int)
+        seen[0] = 1
+        prefix = res = 0
 
-        for i, num in enumerate(nums):
-            prefix += num
-            lookup = prefix - k
+        for i in nums:
+            prefix += i
+            target = prefix - k
 
-            count += seen.get(lookup, 0)
+            res += seen[target]
 
-            seen[prefix] = seen.get(prefix, 0) + 1
+            seen[prefix] += 1
 
-        return count
+        return res
