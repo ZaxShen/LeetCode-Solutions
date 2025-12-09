@@ -11,7 +11,6 @@ class Solution:
             target = prefix - k
 
             res += seen[target]
-
             seen[prefix] += 1
 
         return res
