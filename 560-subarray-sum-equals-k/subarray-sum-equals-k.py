@@ -8,14 +8,11 @@ class Solution:
 
         for i in nums:
             prefix += i
-            target = prefix - k
+            lookup = prefix - k
 
-            if target in seen:
-                res += seen[target]
-
-            if prefix in seen:
-                seen[prefix] += 1
-            else:
-                seen[prefix] = 1
+            if lookup in seen:
+                res += seen[lookup]
+            
+            seen[prefix] += 1
 
         return res
