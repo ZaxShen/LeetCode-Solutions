@@ -1,4 +1,8 @@
 class Solution:
     def reversePrefix(self, word: str, ch: str) -> str:
-        idx = word.find(ch) + 1
+        try:
+            idx = word.index(ch) + 1
+        except ValueError:
+            return word
+
         return word[:idx][::-1] + word[idx:]
