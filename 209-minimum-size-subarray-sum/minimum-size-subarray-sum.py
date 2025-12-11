@@ -5,7 +5,7 @@ class Solution:
 
         for right, i in enumerate(nums):
             win_sum += i
-            while left <= right and win_sum >= target:
+            while win_sum >= target:
                 res = min(res, right - left + 1)
                 win_sum -= nums[left]
                 left += 1
