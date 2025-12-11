@@ -1,9 +1,9 @@
 from collections import deque
 
 class Solution:
-    # O(n), O(1)
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         dq = deque()
+
         res = []
 
         for idx, i in enumerate(nums):
