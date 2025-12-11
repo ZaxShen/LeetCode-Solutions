@@ -1,17 +1,22 @@
 from collections import Counter
 
 class Solution:
+    # O(n), O(k)
     def checkInclusion(self, s1: str, s2: str) -> bool:
+        # Edge Case
         if len(s1) > len(s2): return False
 
-        n1 = len(s1)
-        perm1 = Counter(s1)
-        perm2 = Counter(s2[:n1])
-        if perm1 == perm2: return True
+        c1 = Counter(s1)
+        c2 = Counter(s2[:len(s1)])
+        if c1 == c2: return True
 
-        for i in range(n1, len(s2)):
-            perm2[s2[i - n1]] -= 1
-            perm2[s2[i]] += 1
-            if perm1 == perm2: return True
+        left = 0
+
+        for i in s2[len(s1):]:
+            c2[i] += 1
+            c2[s2[left]] -= 1
+            left += 1
+            
+            if c1 == c2: return True
 
         return False
