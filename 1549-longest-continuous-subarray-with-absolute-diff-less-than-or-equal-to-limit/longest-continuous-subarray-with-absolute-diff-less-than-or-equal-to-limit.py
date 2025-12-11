@@ -1,40 +1,27 @@
 from collections import deque
 
 class Solution:
+    # O(n), O(n)
     def longestSubarray(self, nums: List[int], limit: int) -> int:
-        asc_q = deque()
-        desc_q = deque()
-        res = left = 0
+        aq = deque()
+        dq = deque()
+        left = res = 0
 
-        # 8
-        # 8
+        for right, i in enumerate(nums):
+            while aq and aq[-1] > i:
+                aq.pop()
+            aq.append(i)
 
-        # 2
-        # 8, 2
+            while dq and dq[-1] < i:
+                dq.pop()
+            dq.append(i)
 
-        # 2, 4
-        # 8, 4
-
-        # 2, 4, 7
-        # 8, 7
-
-        for idx, i in enumerate(nums):
-            while asc_q and asc_q[-1] > i:
-                asc_q.pop()
-            asc_q.append(i)
-
-            while desc_q and desc_q[-1] < i:
-                desc_q.pop()
-            desc_q.append(i)
-
-            while desc_q[0] - asc_q[0] > limit:
-                # Either operate desc_q or asc_q
-                # [8, 2, 4]
-                if nums[left] == desc_q[0]:
-                    desc_q.popleft()
-                elif nums[left] == asc_q[0]:
-                    asc_q.popleft()
+            while dq[0] - aq[0] > limit:
+                if dq[0] == nums[left]:
+                    dq.popleft()
+                elif aq[0] == nums[left]:
+                    aq.popleft()
                 left += 1
-            res = max(res, idx - left + 1)
+            res = max(res, right - left + 1)
 
         return res
