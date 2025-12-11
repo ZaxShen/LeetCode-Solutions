@@ -4,7 +4,10 @@ class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         if len(ransomNote) > len(magazine): return False
 
-        c1 = Counter(ransomNote)
-        c2 = Counter(magazine)
+        counter = Counter(magazine)
+        for i in ransomNote:
+            if counter[i] == 0:
+                return False
+            counter[i] -= 1
 
-        return c2 >= c1
+        return True
