@@ -1,9 +1,10 @@
 class Solution:
     # O(n), O(1)
     def missingNumber(self, nums: List[int]) -> int:
-        all_nums = range(len(nums) + 1)
-        hashset = set(nums)
+        n = len(nums) + 1
+        max_num = len(nums)
 
-        for i in all_nums:
-            if i not in hashset:
-                return i
+        exp_sum = (0 + max_num) * (n / 2)
+        act_sum = sum(nums)
+
+        return int(exp_sum - act_sum)
