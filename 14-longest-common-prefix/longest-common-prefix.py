@@ -7,7 +7,7 @@ class Solution:
             word = strs[0][i]
             for j in strs[1:]:
                 if word != j[i]:
-                    return ''.join(strs[0][:i])
+                    return strs[0][:i]
 
-        return ''.join(strs[0][:min_len])
+        return strs[0][:min_len]
                 
