@@ -1,20 +1,18 @@
-from collections import defaultdict
-
 class Solution:
+    # O(n), O(n)
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        hashmap = defaultdict(int)
         mono_stack = []
+        mapping = {}
 
-        for idx, i in enumerate(nums2):
+        for i in nums2:
             while mono_stack and mono_stack[-1] < i:
-                hashmap[mono_stack.pop()] = i
+                mapping[mono_stack.pop()] = i
             mono_stack.append(i)
 
-        res = []
-        for i in nums1:
-            if i in hashmap:
-                res.append(hashmap[i])
-            else:
-                res.append(-1)
+        res = [-1] * len(nums1)
+
+        for idx, i in enumerate(nums1):
+            if i in mapping:
+                res[idx] = mapping[i]
 
         return res
