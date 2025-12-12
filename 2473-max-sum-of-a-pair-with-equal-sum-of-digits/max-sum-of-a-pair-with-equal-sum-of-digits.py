@@ -19,9 +19,9 @@ class Solution:
             digits = helper(i)
             if digits in seen:
                 res = max(res, seen[digits] + i)
-                if seen[digits] < i:
-                    seen[digits] = i
-            else:
-                seen[digits] = i
+            #     if seen[digits] < i:
+            #         seen[digits] = i
+            # else:
+            seen[digits] = max(seen[digits], i)
 
         return res
