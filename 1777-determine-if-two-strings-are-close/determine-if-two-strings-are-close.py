@@ -1,12 +1,12 @@
 from collections import Counter
 
 class Solution:
-    # O(klogk), O(k)
+    # O(nlogn + mlognm), O(m + n)
     def closeStrings(self, word1: str, word2: str) -> bool:
-        # Edge Case
         if len(word1) != len(word2): return False
 
-        c1, c2 = Counter(word1), Counter(word2)
-        if c1.keys() != c2.keys(): return False
+        count1, count2 = Counter(word1), Counter(word2)
+        if count1.keys() != count2.keys(): return False
 
-        return sorted(c1.values()) == sorted(c2.values())
+		# Only if the number of each letter match
+        return sorted(count1.values()) == sorted(count2.values())
