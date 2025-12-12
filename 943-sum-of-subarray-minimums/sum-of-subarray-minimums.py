@@ -1,27 +1,19 @@
 class Solution:
-    # O(n), O(n)
     def sumSubarrayMins(self, arr: List[int]) -> int:
         MOD = 10 ** 9 + 7
-
         mins = [0] * len(arr)
-        mono_stack = []
-        res = 0
+        asc_stack = []
 
         for idx, i in enumerate(arr):
-            while mono_stack and arr[mono_stack[-1]] > i:
-                mono_stack.pop()
+            while asc_stack and arr[asc_stack[-1]] > i:
+                asc_stack.pop()
             
-            if mono_stack:
-                # prev_min = mins[idx - 1] ❌
-                prev_min = mins[mono_stack[-1]]
-                # curr_min = prev_min + i ❌
-                curr_min = prev_min + i * (idx - mono_stack[-1])
+            if asc_stack:
+                prev_min = mins[asc_stack[-1]]
+                mins[idx] = prev_min + i * (idx - asc_stack[-1])
             else:
-                curr_min = i * (idx + 1)
-            mins[idx] = curr_min
+                mins[idx] = i * (idx + 1)
 
-            res += curr_min
-            mono_stack.append(idx)
+            asc_stack.append(idx)
 
-        return res % MOD
-            
+        return sum(mins) % MOD
