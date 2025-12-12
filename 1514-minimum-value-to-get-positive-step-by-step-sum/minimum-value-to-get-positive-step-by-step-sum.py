@@ -1,9 +1,10 @@
 class Solution:
+    # O(n), O(1)
     def minStartValue(self, nums: List[int]) -> int:
-        curr = min_start_val = 0
+        res = prefix = 0
 
         for i in nums:
-            curr += i
-            min_start_val = min(curr, min_start_val)
+            prefix += i
+            res = min(res, prefix)
 
-        return -min_start_val + 1
+        return -res + 1
