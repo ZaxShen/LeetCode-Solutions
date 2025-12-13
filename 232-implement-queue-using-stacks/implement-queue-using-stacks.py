@@ -1,6 +1,8 @@
 class MyQueue:
 
     def __init__(self):
+        # [1, 2, 3
+        # 1, 2, 3
         self.enstack = []
         self.destack = []
 
@@ -9,12 +11,10 @@ class MyQueue:
 
     def pop(self) -> int:
         self.peek()
-
         return self.destack.pop()
 
     def peek(self) -> int:
         enstack, destack = self.enstack, self.destack
-
         if not destack:
             while enstack:
                 destack.append(enstack.pop())
