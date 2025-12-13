@@ -7,7 +7,8 @@ class Solution:
             if stack and mapping.get(stack[-1]) == i:
                 stack.pop()
             else:
-                if i not in mapping:
+                # Early Termination
+                if i in mapping.values():
                     return False
                 stack.append(i)
         
