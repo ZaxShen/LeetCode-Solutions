@@ -7,6 +7,8 @@ class Solution:
         while si < len(s) and ti < len(t):
             if s[si] == t[ti]:
                 si += 1
+            if len(s) - si > len(t) - ti:
+                return False
             ti += 1
 
         return len(s) == si
