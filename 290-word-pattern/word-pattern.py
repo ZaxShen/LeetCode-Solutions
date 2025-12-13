@@ -1,6 +1,10 @@
 class Solution:
+    # O(n), O(n)
     def wordPattern(self, pattern: str, s: str) -> bool:
-        s = s.split()
+        def helper(x: str | list) -> tuple:
+            return tuple(map(x.index, x))
+
+        s = s.split(' ')
         if len(pattern) != len(s): return False
 
-        return tuple(map(pattern.index, pattern)) == tuple(map(s.index, s))
+        return helper(pattern) == helper(s)
