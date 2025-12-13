@@ -1,16 +1,17 @@
 class Solution:
+    # O(n), O(n)
     def isSubsequence(self, s: str, t: str) -> bool:
         # Early Termination
         if len(s) > len(t) or set(s) > set(t):
             return False
 
-        si = ti = 0
-        while si < len(s) and ti < len(t):
-            if s[si] == t[ti]:
-                si += 1
+        i = j = 0
+        while i < len(s) and j < len(t):
+            if s[i] == t[j]:
+                i += 1
             # Early Termination
-            if len(s) - si > len(t) - ti:
+            if len(s) - i > len(t) - j:
                 return False
-            ti += 1
+            j += 1
 
-        return len(s) == si
+        return i == len(s)
