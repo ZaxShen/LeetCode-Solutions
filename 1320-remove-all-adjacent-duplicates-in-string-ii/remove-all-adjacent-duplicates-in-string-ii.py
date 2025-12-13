@@ -1,14 +1,15 @@
 class Solution:
+    # O(n), O(k)
     def removeDuplicates(self, s: str, k: int) -> str:
-        stack = []  # sotres [char, count] pairs
+        stack = []  # (char, count)
 
-        for char in s:
-            if stack and stack[-1][0] == char:
-                stack[-1][1] += 1
-                if stack[-1][1] == k:
+        for i in s:
+            if stack and stack[-1][0] == i:
+                stack[-1][-1] += 1
+                if stack and stack[-1][-1] == k:
                     stack.pop()
             else:
-                stack.append([char, 1])
+                stack.append([i, 1])
 
         res = []
         for char, count in stack:
