@@ -7,6 +7,8 @@ class Solution:
             if stack and mapping.get(stack[-1]) == i:
                 stack.pop()
             else:
+                if i not in mapping:
+                    return False
                 stack.append(i)
         
         return len(stack) == 0
