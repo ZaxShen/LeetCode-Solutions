@@ -6,13 +6,9 @@ class Solution:
         for i in s:
             if stack and stack[-1][0] == i:
                 stack[-1][-1] += 1
-                if stack and stack[-1][-1] == k:
+                if stack[-1][-1] == k:
                     stack.pop()
             else:
                 stack.append([i, 1])
 
-        res = []
-        for char, count in stack:
-            res.append(char * count)
-
-        return ''.join(res)
+        return ''.join(char * count for char, count in stack)
