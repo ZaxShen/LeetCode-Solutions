@@ -6,14 +6,13 @@ class Solution:
         seen[0] = 1
         prefix = res = 0
 
-        for idx, i in enumerate(nums):
+        for i in nums:
             prefix += i
             lookup = prefix % k
 
             if lookup in seen:
                 res += seen[lookup]
-            
+
             seen[lookup] += 1
 
-        print(seen)
         return res
