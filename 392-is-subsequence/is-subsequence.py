@@ -1,10 +1,12 @@
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-        i = j = 0
+        # Early Termination
+        if len(s) > len(t): return False
 
-        while i < len(s) and j < len(t):
-            if s[i] == t[j]:
-                i += 1
-            j += 1
+        si = ti = 0
+        while si < len(s) and ti < len(t):
+            if s[si] == t[ti]:
+                si += 1
+            ti += 1
 
-        return len(s) == i
+        return len(s) == si
