@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(n)
     def removeDuplicates(self, s: str, k: int) -> str:
         stack = []  # [char, count]
 
@@ -10,4 +11,9 @@ class Solution:
             else:
                 stack.append([i, 1])
 
-        return ''.join(char * count for char, count in stack)
+        res = []
+
+        for char, count in stack:
+            res.append(char * count)
+
+        return ''.join(res)
