@@ -1,9 +1,7 @@
-from collections import defaultdict
-
 class Solution:
+    # O(n), O(1)
     def subarraysDivByK(self, nums: List[int], k: int) -> int:
-        seen = defaultdict(int)
-        seen[0] = 1
+        seen = {0: 1}
         prefix = res = 0
 
         for i in nums:
@@ -12,7 +10,8 @@ class Solution:
 
             if lookup in seen:
                 res += seen[lookup]
-
-            seen[lookup] += 1
+                seen[lookup] += 1
+            else:
+                seen[lookup] = 1
 
         return res
