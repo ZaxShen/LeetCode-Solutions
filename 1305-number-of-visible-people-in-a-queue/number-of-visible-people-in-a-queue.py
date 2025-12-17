@@ -1,14 +1,22 @@
 class Solution:
-    # O(n), O(1)
     def canSeePersonsCount(self, heights: List[int]) -> List[int]:
-        d_s = []
-        res = [0] * len(heights)
+        n = len(heights)
+        res = [0] * n
+        stack = [] # Monotonic decreasing stack
 
-        for idx, i in enumerate(heights):
-            while d_s and heights[d_s[-1]] < i:
-                res[d_s.pop()] += 1
-            if d_s:
-                res[d_s[-1]] += 1
-            d_s.append(idx)
-
+        # Iterate backwards
+        for i in range(n - 1, -1, -1):
+            count = 0
+            # While the current person is taller than the person on the stack
+            while stack and heights[i] > stack[-1]:
+                stack.pop()
+                count += 1
+            
+            # If the stack isn't empty, they can see the person taller than them
+            if stack:
+                count += 1
+                
+            res[i] = count
+            stack.append(heights[i])
+            
         return res
