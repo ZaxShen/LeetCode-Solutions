@@ -1,5 +1,5 @@
 class Solution:
-    # O(n), O(n)
+    # O(n), O(1)
     def canSeePersonsCount(self, heights: List[int]) -> List[int]:
         d_s = []
         res = [0] * len(heights)
