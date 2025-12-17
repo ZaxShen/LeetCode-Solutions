@@ -1,12 +1,12 @@
 class Solution:
+    # O(n), O(n)
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        seen = {}
+        hashmap = {}
 
-        for i, num in enumerate(nums):
-            diff = target - num
-            if diff in seen:
-                return seen[diff], i
-            else:
-                seen[num] = i
-
-        return -1, -1
+        for idx, i in enumerate(nums):
+            diff = target - i
+            if diff in hashmap:
+                return [hashmap[diff], idx]
+            hashmap[i] = idx
+            
+        return [-1, -1]
