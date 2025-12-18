@@ -9,6 +9,7 @@ class Solution:
             winners[winner] += 1
             losers[loser] += 1
 
-        zero_lose = winners.keys() - losers.keys()
-        one_lose = [loser for loser, matches in losers.items() if matches == 1]
-        return sorted(zero_lose), sorted(one_lose)
+        zero_loss = winners.keys() - losers.keys()
+        one_loss = [k for k, v in losers.items() if v == 1]
+
+        return [sorted(zero_loss), sorted(one_loss)]
