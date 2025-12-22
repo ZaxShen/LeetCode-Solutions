@@ -1,12 +1,13 @@
 class Solution:
     def validSubarrays(self, nums: List[int]) -> int:
-        mono_stack = []
+        asc_stack = []
         res = 0
 
         for i in nums:
-            while mono_stack and mono_stack[-1] > i:
-                mono_stack.pop()
-            mono_stack.append(i)
-            res += len(mono_stack)
+            while asc_stack and asc_stack[-1] > i:
+                asc_stack.pop()
+            asc_stack.append(i)
+
+            res += len(asc_stack)
 
         return res
