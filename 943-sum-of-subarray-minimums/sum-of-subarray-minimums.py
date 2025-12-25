@@ -9,11 +9,12 @@ class Solution:
                 asc_stack.pop()
             
             if asc_stack:
-                prev_min = mins[asc_stack[-1]]
-                mins[idx] = prev_min + i * (idx - asc_stack[-1])
+                prev_sum = mins[asc_stack[-1]]
+                mins[idx] = prev_sum + i * (idx - asc_stack[-1])
             else:
                 mins[idx] = i * (idx + 1)
-
+            
             asc_stack.append(idx)
 
         return sum(mins) % MOD
+            
