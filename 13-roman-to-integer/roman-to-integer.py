@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(1)
     def romanToInt(self, s: str) -> int:
         roman = {
             "I": 1,
@@ -11,14 +12,12 @@ class Solution:
         }
 
         prefix = 0
-        for i in range(len(s) - 1):
-            n1, n2 = roman[s[i]], roman[s[i + 1]]
-            if n1 < n2:
-                prefix -= n1
-            else:
-                prefix += n1
 
+        for i in range(len(s) - 1):
+            curr_num, next_num = roman[s[i]], roman[s[i + 1]]
+            if curr_num < next_num:
+                curr_num = -curr_num
+            prefix += curr_num
         prefix += roman[s[-1]]
 
         return prefix
-
