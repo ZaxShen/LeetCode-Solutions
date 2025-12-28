@@ -1,8 +1,7 @@
 class Solution:
-    # O(n), O(1)
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        res = float('inf')
         left = win_sum = 0
+        res = float('inf')
 
         for right, i in enumerate(nums):
             win_sum += i
