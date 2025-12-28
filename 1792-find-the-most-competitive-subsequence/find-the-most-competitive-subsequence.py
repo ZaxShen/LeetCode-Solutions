@@ -1,12 +1,12 @@
 class Solution:
     def mostCompetitive(self, nums: List[int], k: int) -> List[int]:
-        asc_stack = []
-        count = len(nums) - k
+        stack = []
+        stack_count = len(nums) - k
 
         for i in nums:
-            while asc_stack and asc_stack[-1] > i and count > 0:
-                asc_stack.pop()
-                count -= 1
-            asc_stack.append(i)
+            while stack_count > 0 and stack and stack[-1] > i:
+                stack.pop()
+                stack_count -= 1
+            stack.append(i)
 
-        return asc_stack[:k]
+        return stack[:k]
