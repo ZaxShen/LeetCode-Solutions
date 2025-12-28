@@ -1,13 +1,10 @@
-from collections import defaultdict, Counter
+from collections import defaultdict
 
 class Solution:
-    # O(n), O(n)
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        d = defaultdict(list)
-        
-        for word in strs:
-            count = Counter(word)
-            key = tuple(sorted(count.items()))
-            d[key].append(word)
+        hashmap = defaultdict(list)
 
-        return list(d.values())
+        for i in strs:
+            hashmap[tuple(sorted(i))].append(i)
+
+        return list(hashmap.values())
