@@ -7,19 +7,16 @@ class Solution:
             slow = slow.next
             
         # Step 2: Reverse the second half
-        prev = None
-        while slow:
-            temp = slow.next
-            slow.next = prev
-            prev = slow
-            slow = temp
-            
+        prev, curr = None, slow
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
+
         # Step 3: Check palindrome
-        left, right = head, prev
-        while right: # Only need to check the reversed half
-            if left.val != right.val:
+        first, second = head, prev
+        while second:  # Only need to check the reversed half
+            if first.val != second.val:
                 return False
-            left = left.next
-            right = right.next
+            first = first.next
+            second = second.next
             
         return True
