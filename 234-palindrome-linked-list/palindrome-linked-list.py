@@ -5,24 +5,24 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        if not head or not head.next:
-            return True
-        
-        slow = fast = head
-        while fast and fast.next:
+        if not head or not head.next: return True
+
+        slow, fast = head, head
+
+        while fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
 
-        prev, curr = None, slow
+        prev, curr = None, slow.next
         while curr:
             curr.next, prev, curr = prev, curr, curr.next
 
-        left, right = head, prev
-        while right:
-            if left.val != right.val:
-                print(left.val, right.val)
+        first, second = head, prev
+
+        while second:
+            if first.val != second.val:
                 return False
-            left = left.next
-            right = right.next
+            first = first.next
+            second = second.next
 
         return True
