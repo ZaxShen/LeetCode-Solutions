@@ -11,4 +11,4 @@ class Solution:
             nodeA = nodeA.next if nodeA else headB
             nodeB = nodeB.next if nodeB else headA
         
-        return nodeA
+        return nodeB
