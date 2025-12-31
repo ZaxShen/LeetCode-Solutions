@@ -1,13 +1,9 @@
 from collections import Counter
 
 class Solution:
+    # O(n), O(k)
     def maxFrequencyElements(self, nums: List[int]) -> int:
         count = Counter(nums)
+        max_freq = max(count.values())
 
-        res = 0
-
-        for k, v in count.items():
-            if v == max(count.values()):
-                res += v
-
-        return res
+        return sum(filter(lambda x: x == max_freq, count.values()))
