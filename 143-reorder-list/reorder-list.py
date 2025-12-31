@@ -8,23 +8,19 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        dummy = ListNode(0, head)
-
+        # 1. Get middle of the list
         slow = fast = head
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-
-        prev = None
-        curr = slow
+            slow, fast = slow.next, fast.next.next
+        
+        # 2. Reverse the second half
+        prev, curr = None, slow
         while curr:
             curr.next, prev, curr = prev, curr, curr.next
 
-        first = head
-        second = prev
-        while second and second.next:
+        # 3. Reorder list
+        first, second = head, prev
+        while second.next:
             first.next, first = second, first.next
             second.next, second = first, second.next
-
-
-        return dummy.next
+        
