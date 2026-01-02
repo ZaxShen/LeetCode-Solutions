@@ -11,3 +11,4 @@ class Solution:
             res += len(asc_stack)
 
         return res
+        
