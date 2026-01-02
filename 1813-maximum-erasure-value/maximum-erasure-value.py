@@ -1,9 +1,9 @@
 class Solution:
+    # O(n), O(k)
     def maximumUniqueSubarray(self, nums: List[int]) -> int:
         seen = set()
-        left = res = win_sum = 0
-        
-        
+        res = left = win_sum = 0
+
         for i in nums:
             win_sum += i
             while i in seen:
