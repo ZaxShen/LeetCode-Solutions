@@ -1,20 +1,16 @@
 from collections import Counter
 
 class Solution:
+    # O(nlogn), O(k)
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
-        loss_count = Counter()
+        winners = Counter()
+        losers = Counter()
 
         for winner, loser in matches:
-            loss_count[winner] += 0
-            loss_count[loser] += 1
+            winners[winner] += 1
+            losers[loser] += 1
 
-        zero_loss = []
-        one_loss = []
+        zero_loss = winners.keys() - losers.keys()
+        one_loss = [k for k,v in losers.items() if v == 1]
 
-        for k, v in loss_count.items():
-            if v == 0:
-                zero_loss.append(k)
-            elif v == 1:
-                one_loss.append(k)
-
-        return [sorted(zero_loss), sorted(one_loss)]
+        return sorted(zero_loss), sorted(one_loss)
