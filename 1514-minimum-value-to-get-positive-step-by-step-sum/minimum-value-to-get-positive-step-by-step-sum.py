@@ -1,10 +1,11 @@
 class Solution:
     # O(n), O(1)
     def minStartValue(self, nums: List[int]) -> int:
-        prefix = min_val = 0
+        prefix = 0
+        min_val = float('inf')
 
         for i in nums:
             prefix += i
             min_val = min(min_val, prefix)
 
-        return -min_val + 1
+        return 1 if min_val > 0 else 1 - min_val
