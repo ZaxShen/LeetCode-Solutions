@@ -6,8 +6,7 @@
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         node1, node2 = l1, l2
-        dummy = ListNode()
-        curr = dummy
+        dummy = curr = ListNode()
         carry = 0
 
         while node1 or node2 or carry:
@@ -22,11 +21,11 @@ class Solution:
                 node2 = node2.next
             else:
                 val2 = 0
-
-            curr_sum = val1 + val2 + carry
-            carry = curr_sum // 10
-            curr.next = ListNode(curr_sum % 10)
-
+            
+            val = val1 + val2 + carry
+            carry = val // 10
+            curr.next = ListNode(val % 10)
             curr = curr.next
 
         return dummy.next
+
