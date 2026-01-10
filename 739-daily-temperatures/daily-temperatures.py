@@ -1,13 +1,13 @@
 class Solution:
-    # O(n), O(1)
+    # O(n), O(n)
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        mono_stack = []
-        res = [0] * len(temperatures)
+        answer = [0] * len(temperatures)
+        desc_stack = []
 
         for idx, i in enumerate(temperatures):
-            while mono_stack and temperatures[mono_stack[-1]] < i:
-                popped = mono_stack.pop()
-                res[popped] = idx - popped
-            mono_stack.append(idx)
+            while desc_stack and temperatures[desc_stack[-1]] < i:
+                popped = desc_stack.pop()
+                answer[popped] = idx - popped
+            desc_stack.append(idx)
 
-        return res
+        return answer
