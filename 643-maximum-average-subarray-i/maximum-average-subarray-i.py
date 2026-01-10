@@ -1,7 +1,7 @@
 class Solution:
-    # O(n), O(k)
     def findMaxAverage(self, nums: List[int], k: int) -> float:
-        if k >= len(nums): return sum(nums) / len(nums)
+        # Edge case
+        if len(nums) <= k: return sum(nums) / len(nums)
 
         # First window
         win_sum = res = sum(nums[:k])
