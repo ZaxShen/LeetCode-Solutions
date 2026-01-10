@@ -1,4 +1,4 @@
 class Solution:
-    # O(m+n), O(m+n)
+    # O(n+m), O(n+m)
     def isIsomorphic(self, s: str, t: str) -> bool:
         return tuple(map(s.index, s)) == tuple(map(t.index, t))
