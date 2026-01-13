@@ -1,27 +1,23 @@
-from collections import defaultdict
-
 class Solution:
+    # O(n), O(k)
     def maximumSum(self, nums: List[int]) -> int:
-        def helper(num: int) -> int:
+        mapping = dict()
+        res = -1
+
+        def helper(num: int) -> str:
             res = 0
-            
             while num != 0:
                 res += num % 10
                 num = num // 10
-            res + num
 
-            return res
-
-        seen = defaultdict(int)
-        res = -1
+            return res + num
 
         for i in nums:
             digits = helper(i)
-            if digits in seen:
-                res = max(res, seen[digits] + i)
-            #     if seen[digits] < i:
-            #         seen[digits] = i
-            # else:
-            seen[digits] = max(seen[digits], i)
+            if digits in mapping:
+                res = max(res, mapping[digits] + i)
+                mapping[digits] = max(mapping[digits], i)
+            else:
+                mapping[digits] = i
 
         return res
