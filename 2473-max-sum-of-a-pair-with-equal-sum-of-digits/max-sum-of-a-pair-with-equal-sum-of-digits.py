@@ -4,8 +4,16 @@ class Solution:
         d = dict()
         res = -float('inf')
 
+        def helper(num: int) -> str:
+            res = 0
+            while num != 0:
+                res += num % 10
+                num = num // 10
+
+            return res + num
+
         for i in nums:
-            digits = sum(map(int, str(i)))
+            digits = helper(i)
             if digits in d:
                 res = max(res, d[digits] + i)
                 d[digits] = max(d[digits], i)
