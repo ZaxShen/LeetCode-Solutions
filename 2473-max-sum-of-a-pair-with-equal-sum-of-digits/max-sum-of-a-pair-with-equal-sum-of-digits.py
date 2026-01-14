@@ -1,9 +1,7 @@
 class Solution:
     # O(n), O(1)
     def maximumSum(self, nums: List[int]) -> int:
-        d = dict()
-        res = -float('inf')
-
+        # O(n), O(1)
         def helper(num: int) -> str:
             res = 0
             while num != 0:
@@ -12,6 +10,9 @@ class Solution:
 
             return res + num
 
+        d = dict()
+        res = -float('inf')
+        
         for i in nums:
             digits = helper(i)
             if digits in d:
