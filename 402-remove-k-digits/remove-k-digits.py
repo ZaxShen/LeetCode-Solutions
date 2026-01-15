@@ -1,16 +1,18 @@
 class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
-        asc_stack = []
+        # Edge case
+        if k == len(num): return "0"
+
+        stack = []
 
         for i in num:
-            while k > 0 and asc_stack and asc_stack[-1] > i:
-                asc_stack.pop()
+            while k > 0 and stack and stack[-1] > i:
+                stack.pop()
                 k -= 1
-            asc_stack.append(i)
+            stack.append(i)
 
+        res = ''.join(stack).lstrip('0')
         if k > 0:
-            asc_stack = asc_stack[:-k]
-        
-        res = ''.join(asc_stack).lstrip('0')
+            res = res[:-k]
 
         return res or '0'
