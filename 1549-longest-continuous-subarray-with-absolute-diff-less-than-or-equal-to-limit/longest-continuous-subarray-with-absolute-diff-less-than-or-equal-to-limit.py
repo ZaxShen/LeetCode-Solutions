@@ -1,11 +1,10 @@
 from collections import deque
 
 class Solution:
-    # O(n), O(n)
     def longestSubarray(self, nums: List[int], limit: int) -> int:
         aq = deque()
         dq = deque()
-        left = res = 0
+        res = left = 0
 
         for right, i in enumerate(nums):
             while aq and aq[-1] > i:
@@ -22,6 +21,7 @@ class Solution:
                 elif aq[0] == nums[left]:
                     aq.popleft()
                 left += 1
+            
             res = max(res, right - left + 1)
 
         return res
