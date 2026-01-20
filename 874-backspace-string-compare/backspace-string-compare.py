@@ -1,13 +1,15 @@
 class Solution:
+    # O(n+m), O(n+m)
     def backspaceCompare(self, s: str, t: str) -> bool:
-        def helper(s: str) -> str:
+        stack = []
+
+        def helper(s: str) -> list:
             stack = []
-            for char in s:
-                if char != '#':
-                    stack.append(char)
-                else:
-                    if stack:
-                        stack.pop()
+            for i in s:
+                if stack and i == '#':
+                    stack.pop()
+                elif i != '#':
+                    stack.append(i)
 
             return stack
 
