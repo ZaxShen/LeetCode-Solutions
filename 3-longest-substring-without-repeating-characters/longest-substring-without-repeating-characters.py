@@ -4,11 +4,11 @@ class Solution:
         seen = set()
         left = res = 0
 
-        for right, i in enumerate(s):
+        for i in s:
             while i in seen:
                 seen.remove(s[left])
                 left += 1
             seen.add(i)
-            res = max(res, right - left + 1)
+            res = max(res, len(seen))
 
         return res
