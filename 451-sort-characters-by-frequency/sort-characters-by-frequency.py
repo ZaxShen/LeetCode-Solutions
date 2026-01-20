@@ -1,13 +1,12 @@
 from collections import Counter
 
 class Solution:
-    # O(n), O(k)
     def frequencySort(self, s: str) -> str:
         count = Counter(s)
-        desc_s = sorted(count, key=count.get, reverse=True)
         res = []
+        sorted_count = sorted(count, key=count.get, reverse=True)
 
-        for i in desc_s:
+        for i in sorted_count:
             res.append(i * count[i])
 
         return ''.join(res)
