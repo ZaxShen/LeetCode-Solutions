@@ -2,6 +2,12 @@ from collections import Counter
 
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
+        # Edge case
+        if len(s) > len(t):
+            return False
+        if s == t:
+            return True
+        
         i = j = 0
 
         while i < len(s) and j < len(t):
