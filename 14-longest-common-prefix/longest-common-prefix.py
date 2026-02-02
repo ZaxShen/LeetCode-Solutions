@@ -1,4 +1,5 @@
 class Solution:
+    # O(n), O(1)
     def longestCommonPrefix(self, strs: List[str]) -> str:
         # Edge case
         if len(strs) == 1: return strs[0]
