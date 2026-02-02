@@ -1,11 +1,8 @@
-SELECT
-    a1.machine_id,
-    ROUND(AVG(a2.timestamp - a1.timestamp)::NUMERIC, 3) AS processing_time
-FROM
-    Activity a1
-    JOIN Activity a2 ON a1.activity_type = 'start'
-    AND  a2.activity_type = 'end'
-    AND a1.machine_id = a2.machine_id
-    AND a1.process_id = a2.process_id
-GROUP BY a1.machine_id
-ORDER BY machine_id
+SELECT 
+    machine_id,
+    ROUND(
+        AVG(CASE WHEN activity_type = 'end' THEN timestamp ELSE -timestamp END * 2)::NUMERIC, 
+        3
+    ) AS processing_time
+FROM Activity
+GROUP BY machine_id;
